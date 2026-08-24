@@ -1,0 +1,106 @@
+{
+  "asOf": "2026-08-25",
+  "inputUnit": "decimal-GB",
+  "policies": [
+    {
+      "id": "aws-europe-north-america",
+      "provider": "aws",
+      "geographies": ["europe", "north-america"],
+      "providerUnit": "GB",
+      "allowance": 100,
+      "tiers": [
+        { "start": 0, "end": 10240, "rate": 0.09 },
+        { "start": 10240, "end": 51200, "rate": 0.085 },
+        { "start": 51200, "end": 153600, "rate": 0.07 },
+        { "start": 153600, "end": null, "rate": 0.05 }
+      ],
+      "boundaryCases": [100, 10340, 51300, 153700]
+    },
+    {
+      "id": "aws-south-america",
+      "provider": "aws",
+      "geographies": ["south-america"],
+      "providerUnit": "GB",
+      "allowance": 100,
+      "tiers": [
+        { "start": 0, "end": 10240, "rate": 0.15 },
+        { "start": 10240, "end": 51200, "rate": 0.138 },
+        { "start": 51200, "end": 153600, "rate": 0.126 },
+        { "start": 153600, "end": null, "rate": 0.114 }
+      ],
+      "boundaryCases": [100, 10340, 51300, 153700]
+    },
+    {
+      "id": "azure-europe-north-america",
+      "provider": "azure",
+      "geographies": ["europe", "north-america"],
+      "providerUnit": "GB",
+      "allowance": 0,
+      "tiers": [
+        { "start": 0, "end": 100, "rate": 0 },
+        { "start": 100, "end": 10335, "rate": 0.087 },
+        { "start": 10335, "end": 51295, "rate": 0.083 },
+        { "start": 51295, "end": 153695, "rate": 0.07 },
+        { "start": 153695, "end": null, "rate": 0.05 }
+      ],
+      "boundaryCases": [100, 10335, 51295, 153695]
+    },
+    {
+      "id": "azure-south-america",
+      "provider": "azure",
+      "geographies": ["south-america"],
+      "providerUnit": "GB",
+      "allowance": 0,
+      "tiers": [
+        { "start": 0, "end": 100, "rate": 0 },
+        { "start": 100, "end": 10335, "rate": 0.181 },
+        { "start": 10335, "end": 51295, "rate": 0.175 },
+        { "start": 51295, "end": 153695, "rate": 0.17 },
+        { "start": 153695, "end": null, "rate": 0.16 }
+      ],
+      "boundaryCases": [100, 10335, 51295, 153695]
+    },
+    {
+      "id": "gcp-europe",
+      "provider": "gcp",
+      "geographies": ["europe"],
+      "providerUnit": "GiB",
+      "allowance": 0,
+      "tiers": [
+        { "start": 0, "end": 1, "rate": 0 },
+        { "start": 1, "end": 1024, "rate": 0.12 },
+        { "start": 1024, "end": 10240, "rate": 0.11 },
+        { "start": 10240, "end": null, "rate": 0.085 }
+      ],
+      "boundaryCasesProviderUnits": [1, 1024, 10240]
+    },
+    {
+      "id": "gcp-north-america",
+      "provider": "gcp",
+      "geographies": ["north-america"],
+      "providerUnit": "GiB",
+      "allowance": 0,
+      "tiers": [
+        { "start": 0, "end": 1, "rate": 0 },
+        { "start": 1, "end": 1024, "rate": 0.12 },
+        { "start": 1024, "end": 10240, "rate": 0.11 },
+        { "start": 10240, "end": null, "rate": 0.08 }
+      ],
+      "boundaryCasesProviderUnits": [1, 1024, 10240]
+    },
+    {
+      "id": "gcp-south-america",
+      "provider": "gcp",
+      "geographies": ["south-america"],
+      "providerUnit": "GiB",
+      "allowance": 0,
+      "tiers": [
+        { "start": 0, "end": 1024, "rate": 0.19 },
+        { "start": 1024, "end": 10240, "rate": 0.18 },
+        { "start": 10240, "end": null, "rate": 0.15 }
+      ],
+      "boundaryCasesProviderUnits": [1024, 10240]
+    }
+  ],
+  "caseRule": "For each boundary, test boundary-epsilon, boundary, and boundary+epsilon; epsilon is 0.001 provider unit."
+}

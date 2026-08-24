@@ -1,0 +1,99 @@
+{
+  "version": "calculator-reference-v1",
+  "approvedAt": "2026-08-25",
+  "currency": "USD",
+  "monthlyHours": 730,
+  "storageInputUnit": "decimal-GB",
+  "scenarios": [
+    {
+      "id": "ref-10k-eu-medium",
+      "quick": {
+        "applicationType": "web-api",
+        "monthlyActiveUsers": 10000,
+        "geography": { "type": "continent", "value": "europe" },
+        "trafficProfile": "medium",
+        "availability": "standard",
+        "priority": "balanced"
+      },
+      "advanced": {
+        "requestsPerMonth": 6000000,
+        "averageResponseKB": 50,
+        "monthlyEgressGB": 300,
+        "databaseStorageGB": 20,
+        "objectStorageGB": 100
+      },
+      "architecture": {
+        "computeInstances": 1,
+        "databaseAvailability": "single",
+        "loadBalancerRequestSizeKB": 1,
+        "loadBalancerProcessedGB": 306,
+        "awsAverageLcu": 0.419178,
+        "azureAverageCapacityUnits": 1,
+        "gcpForwardingRules": 1
+      }
+    },
+    {
+      "id": "ref-100k-eu-spiky",
+      "quick": {
+        "applicationType": "web-api",
+        "monthlyActiveUsers": 100000,
+        "geography": { "type": "continent", "value": "europe" },
+        "trafficProfile": "spiky",
+        "availability": "production",
+        "priority": "balanced"
+      },
+      "advanced": {
+        "requestsPerMonth": 60000000,
+        "averageResponseKB": 50,
+        "monthlyEgressGB": 3000,
+        "databaseStorageGB": 100,
+        "objectStorageGB": 500
+      },
+      "architecture": {
+        "computeInstances": 2,
+        "databaseAvailability": "provider-ha",
+        "loadBalancerRequestSizeKB": 1,
+        "loadBalancerProcessedGB": 3060,
+        "awsAverageLcu": 4.191781,
+        "azureAverageCapacityUnits": 2,
+        "gcpForwardingRules": 1
+      }
+    },
+    {
+      "id": "ref-500k-na-ha-budget",
+      "quick": {
+        "applicationType": "web-api",
+        "monthlyActiveUsers": 500000,
+        "geography": { "type": "continent", "value": "north-america" },
+        "trafficProfile": "high",
+        "availability": "high",
+        "priority": "cost"
+      },
+      "advanced": {
+        "requestsPerMonth": 600000000,
+        "averageResponseKB": 50,
+        "monthlyEgressGB": 30000,
+        "databaseStorageGB": 500,
+        "objectStorageGB": 2000,
+        "monthlyBudgetUSD": 2500
+      },
+      "architecture": {
+        "computeInstances": 2,
+        "databaseAvailability": "provider-ha",
+        "loadBalancerRequestSizeKB": 1,
+        "loadBalancerProcessedGB": 30600,
+        "awsAverageLcu": 41.917808,
+        "azureAverageCapacityUnits": 20,
+        "gcpForwardingRules": 1
+      }
+    }
+  ],
+  "stableLineItems": [
+    "compute",
+    "database-compute",
+    "database-storage",
+    "object-storage",
+    "load-balancer",
+    "public-egress"
+  ]
+}

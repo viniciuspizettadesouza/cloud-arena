@@ -1,6 +1,6 @@
 # Cloud Arena Implementation TODO
 
-This is the execution backlog for the MVP. Stable IDs should be referenced in commits and pull requests. All implementation tasks are intentionally pending; checked items cover this documentation bootstrap only.
+This is the execution backlog for the MVP. Stable IDs should be referenced in commits and pull requests. Checked items are completed documentation or research work; application implementation begins at Milestone 0.
 
 For each milestone, “quality gates” means format check, lint, typecheck, relevant tests, and build. Playwright is additionally required once the web flow exists.
 
@@ -12,15 +12,16 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Technical spikes
 
-- [ ] **SPIKE-A1 — Capture representative provider price records.** Depends on: DOC-003. Output: redacted/sanitized AWS, Azure, and GCP response samples for every baseline cost category. Acceptance: source URL/API, request parameters, retrieval time, and required credentials are recorded.
-- [ ] **SPIKE-A2 — Define pricing normalization mappings.** Depends on: SPIKE-A1. Output: field-by-field provider-to-`PricingRecord` mapping and unit conversion notes. Acceptance: compute, database compute/storage, object storage, load balancing, and egress are covered or explicitly marked unresolved.
-- [ ] **SPIKE-A3 — Define sync failure and freshness requirements.** Depends on: SPIKE-A1. Output: documented pagination, retries, rate limits, partial-snapshot behavior, and proposed freshness rule. Acceptance: no failure path authorizes fabricated pricing.
-- [ ] **SPIKE-B1 — Select candidate launch regions and exact services/SKUs.** Depends on: SPIKE-A1. Output: evidence table for Europe, North America, and South America across providers. Acceptance: each baseline component has a deployability source separate from its price.
-- [ ] **SPIKE-B2 — Validate networking components.** Depends on: SPIKE-B1. Output: decision on the appropriate load balancer and when CDN is included per provider. Acceptance: comparable capability and material differences are documented.
-- [ ] **SPIKE-C1 — Model required public internet egress tiers.** Depends on: SPIKE-A1, SPIKE-B1. Output: formulas, boundaries, free allowances, units, and source references for launch scenarios. Acceptance: fixtures exercise every implemented tier boundary.
-- [ ] **SPIKE-D1 — Review pricing-data usage terms.** Depends on: SPIKE-A1. Output: documented caching, retention, redistribution, and attribution requirements for all providers. Acceptance: blockers and required notices are identified before any public launch.
-- [ ] **SPIKE-E1 — Define calculator reference architectures.** Depends on: SPIKE-B2, SPIKE-C1. Output: three frozen workloads and matching provider-calculator component selections. Acceptance: inputs and exclusions are reproducible.
-- [ ] **SPIKE-E2 — Set initial cost-deviation policy.** Depends on: SPIKE-E1. Output: component and total comparison method plus acceptable deviation threshold. Acceptance: threshold and exception-recording rules are approved before Milestone 7.
+- [x] **SPIKE-A1 — Capture representative public price records.** Depends on: DOC-003. Output: sanitized AWS and Azure response samples for every baseline cost category plus the evidenced GCP credential failure. Acceptance: source URL/API, request parameters, retrieval time, required credentials, captured providers, and deferred gaps are recorded.
+- [ ] **SPIKE-A1-GCP — Capture authenticated GCP price records.** Depends on: DOC-003. Output: sanitized GCP Cloud Billing Catalog responses for every baseline cost category. Acceptance: exact service/SKU selectors, source units, regions, pricing expressions, tiers, retrieval time, and credential requirements are evidenced. Deferred until a GCP API key or authenticated caller identity is intentionally configured.
+- [x] **SPIKE-A2 — Define pricing normalization mappings.** Depends on: SPIKE-A1. Output: field-by-field provider-to-`PricingRecord` mapping and unit conversion notes. Acceptance: compute, database compute/storage, object storage, load balancing, and egress are covered or explicitly marked unresolved; GCP fixture-dependent selectors remain tracked by SPIKE-A1-GCP.
+- [x] **SPIKE-A3 — Define sync failure and freshness requirements.** Depends on: SPIKE-A1. Output: documented pagination, retries, rate limits, partial-snapshot behavior, and proposed freshness rule. Acceptance: no failure path authorizes fabricated pricing.
+- [x] **SPIKE-B1 — Select candidate launch regions and exact services/SKUs.** Depends on: SPIKE-A1. Output: evidence table for Europe, North America, and South America across providers. Acceptance: each baseline component has a deployability source separate from its price.
+- [x] **SPIKE-B2 — Validate networking components.** Depends on: SPIKE-B1. Output: decision on the appropriate load balancer and when CDN is included per provider. Acceptance: comparable capability and material differences are documented.
+- [x] **SPIKE-C1 — Model required public internet egress tiers.** Depends on: SPIKE-A1, SPIKE-B1. Output: formulas, boundaries, free allowances, units, and source references for launch scenarios. Acceptance: fixtures exercise every implemented tier boundary.
+- [x] **SPIKE-D1 — Review pricing-data usage terms.** Depends on: SPIKE-A1. Output: documented caching, retention, redistribution, and attribution requirements for all providers. Acceptance: blockers and required notices are identified before any public launch.
+- [x] **SPIKE-E1 — Define calculator reference architectures.** Depends on: SPIKE-B2, SPIKE-C1. Output: three frozen workloads and matching provider-calculator component selections. Acceptance: inputs and exclusions are reproducible.
+- [x] **SPIKE-E2 — Set initial cost-deviation policy.** Depends on: SPIKE-E1. Output: component and total comparison method plus acceptable deviation threshold. Acceptance: threshold and exception-recording rules are approved before Milestone 7.
 
 ## Milestone 0 — Foundation
 
@@ -56,7 +57,7 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 - [ ] **M3-001 — Implement pricing snapshot persistence.** Depends on: M0-004, SPIKE-A2. Output: migrations/repositories for snapshots, normalized records, source payload traceability, and retrieval timestamps. Acceptance: partial failed syncs cannot become the active snapshot.
 - [ ] **M3-002 — Implement AWS adapter and parser tests.** Depends on: M3-001, SPIKE-A1. Output: paginated AWS fetcher plus frozen fixture parser. Acceptance: required baseline records normalize with correct units, region, SKU, and source.
 - [ ] **M3-003 — Implement Azure adapter and parser tests.** Depends on: M3-001, SPIKE-A1. Output: paginated Azure Retail Prices fetcher plus frozen fixture parser. Acceptance: same normalized invariants as AWS are verified.
-- [ ] **M3-004 — Implement GCP adapter and parser tests.** Depends on: M3-001, SPIKE-A1. Output: authenticated Cloud Billing Catalog fetcher plus frozen fixture parser. Acceptance: same normalized invariants are verified and missing credentials produce actionable errors.
+- [ ] **M3-004 — Implement GCP adapter and parser tests.** Depends on: M3-001, SPIKE-A1-GCP. Output: authenticated Cloud Billing Catalog fetcher plus frozen fixture parser. Acceptance: same normalized invariants are verified and missing credentials produce actionable errors.
 - [ ] **M3-005 — Implement pricing sync CLI.** Depends on: M3-002, M3-003, M3-004. Output: `pnpm pricing:sync` and `--provider aws|azure|gcp`, logging, retries, and atomic activation. Acceptance: all-provider and individual runs are repeatable and report counts/gaps.
 - [ ] **M3-006 — Verify baseline price coverage.** Depends on: M3-005, M2-005. Output: coverage report by provider, region, capability, and SKU. Acceptance: every candidate component has current public pricing or an explicit blocking gap.
 - [ ] **M3-007 — Pass Milestone 3 quality gates.** Depends on: M3-006. Output: clean checks, fixture-only normal tests, and status update. Acceptance: local database contains a traceable active snapshot.
@@ -105,4 +106,3 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 - [ ] **POST-001 — Add managed-container plus PostgreSQL candidates.** Depends on: M7-007. Output: a second validated cross-provider pattern. Acceptance: pricing/scoring compare provider and architecture pattern without weakening baseline correctness.
 - [ ] **POST-002 — Add sensitivity analysis.** Depends on: POST-001. Output: workload/weight/budget thresholds where recommendations change. Acceptance: results explain the conditions under which each alternative wins.
 - [ ] **POST-003 — Evaluate later roadmap items.** Depends on: M7-007. Output: separately approved plans for serverless, regions, data services, commitments, performance methodology, multi-region, providers, Terraform, CLI, MCP, and AI consumers. Acceptance: none enter MVP implicitly.
-

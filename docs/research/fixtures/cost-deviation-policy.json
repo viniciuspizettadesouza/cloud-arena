@@ -1,0 +1,33 @@
+{
+  "version": "cost-deviation-v1",
+  "approvedAt": "2026-08-25",
+  "currency": "USD",
+  "snapshotMaximumAgeHours": 24,
+  "componentThreshold": {
+    "relative": 0.02,
+    "absoluteFloorUSD": 1,
+    "zeroReferenceCutoffUSD": 0.01
+  },
+  "totalThreshold": {
+    "relative": 0.02,
+    "absoluteFloorUSD": 5
+  },
+  "requiredLineItems": [
+    "compute",
+    "database-compute",
+    "database-storage",
+    "object-storage",
+    "load-balancer",
+    "public-egress"
+  ],
+  "exceptionStatuses": [
+    "proposed",
+    "approved",
+    "expired",
+    "resolved"
+  ],
+  "passingResultStatuses": [
+    "pass",
+    "accepted-exception"
+  ]
+}
