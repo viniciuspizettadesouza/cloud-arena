@@ -25,15 +25,15 @@ The result must contain one AWS, Azure, and GCP candidate; selected regions and 
 - Never fabricate pricing or claim functional equivalents are identical services.
 - Make structured API results authoritative for the web UI and future consumers.
 
-## Planned stack
+## Foundation stack
 
-- pnpm, Turborepo, and TypeScript
-- Next.js, React, Tailwind CSS, and shadcn/ui
-- Fastify, Zod, OpenAPI, and Pino
+- Node.js 24 LTS, pnpm, Turborepo, and strict TypeScript
+- Next.js and React
+- Fastify
 - PostgreSQL and Drizzle ORM
 - Docker Compose, Vitest, Playwright, and GitHub Actions
 
-No application code is present yet. Package versions will be selected from current stable releases during Milestone 0.
+Zod, OpenAPI, Pino, Tailwind CSS, and the component system are introduced by the milestones that need them rather than by the foundation scaffold.
 
 ## Documentation
 
@@ -50,9 +50,10 @@ No application code is present yet. Package versions will be selected from curre
 - [Implementation plan](docs/implementation-plan.md)
 - [Detailed TODO](TODO.md)
 - [Implementation status](docs/implementation-status.md)
+- [Developer setup](docs/development.md)
 - [Foundational implementation brief](docs/reference/original-implementation-brief.md)
 
-## Planned repository shape
+## Repository shape
 
 ```text
 apps/                 web and API applications
@@ -64,8 +65,8 @@ scripts/              operational and validation tooling
 
 ## Development workflow
 
-Implementation proceeds in small milestones described in the [implementation plan](docs/implementation-plan.md). Each milestone must leave formatting, linting, type checking, tests, and builds passing. Provider parser tests use frozen fixtures; normal tests must not require live cloud APIs. Update [implementation status](docs/implementation-status.md) as work progresses.
+Follow the [developer setup](docs/development.md) for exact installation, database, development, test, and build commands. Implementation proceeds in small milestones described in the [implementation plan](docs/implementation-plan.md). Each milestone must leave formatting, linting, type checking, tests, and builds passing. Provider parser tests use frozen fixtures; normal tests must not require live cloud APIs. Update [implementation status](docs/implementation-status.md) as work progresses.
 
 ## Current status
 
-Documentation bootstrap is complete. Technical spikes and all product implementation remain pending.
+Documentation, the non-GCP technical spikes, and Milestone 0 are complete. The workspace now has runnable API and web shells, enforced package boundaries, a migrated PostgreSQL development service, quality gates, and CI. Milestone 1 domain implementation is next; authenticated GCP pricing evidence remains intentionally deferred.

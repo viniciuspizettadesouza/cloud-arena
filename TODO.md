@@ -25,13 +25,13 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 0 — Foundation
 
-- [ ] **M0-001 — Initialize the workspace.** Depends on: SPIKE-A2. Output: pnpm workspace, Turborepo, shared TypeScript config, package scripts, lockfile, and supported runtime metadata. Acceptance: clean install succeeds with current stable dependencies.
-- [ ] **M0-002 — Scaffold API and web applications.** Depends on: M0-001. Output: Fastify API with health route and Next.js web shell. Acceptance: both run through the documented development command.
-- [ ] **M0-003 — Scaffold domain and infrastructure packages.** Depends on: M0-001. Output: contracts, domain, catalog, assumptions, pricing, scoring, recommendation, provider, and database package boundaries. Acceptance: dependency direction is enforced and the domain imports no framework/provider SDK.
-- [ ] **M0-004 — Add PostgreSQL development environment.** Depends on: M0-003. Output: Docker Compose service, Drizzle setup, migration workflow, and example environment documentation. Acceptance: database starts and a connectivity check passes without committed secrets.
-- [ ] **M0-005 — Configure quality tooling.** Depends on: M0-001. Output: formatter, linter, typecheck, Vitest, Playwright foundation, and root scripts. Acceptance: tools run consistently across workspaces without rewriting during check mode.
-- [ ] **M0-006 — Add continuous integration.** Depends on: M0-002, M0-004, M0-005. Output: GitHub Actions workflow for install, format check, lint, typecheck, tests, and build. Acceptance: a clean CI run passes and failures are not suppressed.
-- [ ] **M0-007 — Document developer setup.** Depends on: M0-002, M0-004, M0-005. Output: exact install, environment, database, development, test, and build instructions. Acceptance: commands satisfy Milestone 0 quality gates from a clean checkout.
+- [x] **M0-001 — Initialize the workspace.** Depends on: SPIKE-A2. Output: pnpm workspace, Turborepo, shared TypeScript config, package scripts, lockfile, and supported runtime metadata. Acceptance: clean install succeeds with current stable dependencies.
+- [x] **M0-002 — Scaffold API and web applications.** Depends on: M0-001. Output: Fastify API with health route and Next.js web shell. Acceptance: both run through the documented development command.
+- [x] **M0-003 — Scaffold domain and infrastructure packages.** Depends on: M0-001. Output: contracts, domain, catalog, assumptions, pricing, scoring, recommendation, provider, and database package boundaries. Acceptance: dependency direction is enforced and the domain imports no framework/provider SDK.
+- [x] **M0-004 — Add PostgreSQL development environment.** Depends on: M0-003. Output: Docker Compose service, Drizzle setup, migration workflow, and example environment documentation. Acceptance: database starts and a connectivity check passes without committed secrets.
+- [x] **M0-005 — Configure quality tooling.** Depends on: M0-001. Output: formatter, linter, typecheck, Vitest, Playwright foundation, and root scripts. Acceptance: tools run consistently across workspaces without rewriting during check mode.
+- [x] **M0-006 — Add continuous integration.** Depends on: M0-002, M0-004, M0-005. Output: GitHub Actions workflow for install, format check, lint, typecheck, tests, and build. Acceptance: a clean CI run passes and failures are not suppressed.
+- [x] **M0-007 — Document developer setup.** Depends on: M0-002, M0-004, M0-005. Output: exact install, environment, database, development, test, and build instructions. Acceptance: commands satisfy Milestone 0 quality gates from a clean checkout.
 
 ## Milestone 1 — Domain engine
 

@@ -1,0 +1,13 @@
+node_modules/
+.turbo/
+.next/
+dist/
+coverage/
+playwright-report/
+test-results/
+pnpm-lock.yaml
+docs/
+packages/providers/*/test/fixtures/
+README.md
+TODO.md
+packages/database/drizzle/*.sql
