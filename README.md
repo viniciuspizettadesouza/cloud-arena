@@ -69,4 +69,4 @@ Follow the [developer setup](docs/development.md) for exact installation, databa
 
 ## Current status
 
-Documentation, the non-GCP technical spikes, and Milestone 0 are complete. The workspace now has runnable API and web shells, enforced package boundaries, a migrated PostgreSQL development service, quality gates, and CI. Milestone 1 domain implementation is next; authenticated GCP pricing evidence remains intentionally deferred.
+Documentation, the non-GCP technical spikes, and Milestones 0–1 are complete. The workspace now has runnable API and web shells plus a deterministic workload-normalization engine with validated contracts, versioned assumptions, provenance, confidence, missing-information ranking, and budget constraints. Milestone 2 semantic catalog implementation is next; authenticated GCP pricing evidence remains intentionally deferred.

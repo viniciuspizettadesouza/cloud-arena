@@ -57,6 +57,9 @@ interface NormalizedWorkload {
   assumptions: Assumption[];
   missingInformation: MissingInformation[];
   confidence: number;
+  confidenceLabel: "low" | "medium" | "high";
+  confidenceFactors: ConfidenceFactor[];
+  assumptionsVersion: string;
 }
 ```
 
@@ -145,7 +148,8 @@ interface ConstraintViolation {
 }
 
 interface ConstraintResult {
-  satisfied: boolean;
+  status: "not-applicable" | "pending" | "satisfied" | "violated";
+  satisfied: boolean | null;
   violations: ConstraintViolation[];
 }
 
@@ -170,7 +174,7 @@ interface ScoreBreakdown {
 }
 ```
 
-The initial hard constraint is monthly budget. Constraint satisfaction is reported independently of rank.
+The initial hard constraint is monthly budget. `not-applicable` represents an absent budget and `pending` represents a configured budget before an estimate is available. Constraint satisfaction is reported independently of rank.
 
 ## Comparison result
 
@@ -198,4 +202,3 @@ interface ComparisonResult {
 ```
 
 The exact `Assumption`, `MissingInformation`, and component schemas will be finalized with normalization, while preserving provenance, impact, versioning, and structured machine consumption.
-

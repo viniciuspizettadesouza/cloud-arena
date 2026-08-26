@@ -35,13 +35,13 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 1 — Domain engine
 
-- [ ] **M1-001 — Implement canonical workload schemas.** Depends on: M0-003, M0-005. Output: Zod `WorkloadInput` schema and inferred TypeScript types for Quick and Advanced fields. Acceptance: valid examples pass and invalid ranges/enums fail in unit tests.
-- [ ] **M1-002 — Create versioned assumption data and validation.** Depends on: M1-001. Output: `workload-v1.yaml`, schema loader, documented heuristic values, and version identifier. Acceptance: malformed or incomplete configuration fails fast.
-- [ ] **M1-003 — Implement normalization and provenance.** Depends on: M1-002. Output: deterministic derivation of request rates, peak, egress, storage, availability target, and region preference with field provenance. Acceptance: user overrides take precedence and no magic heuristic is embedded in engine code.
-- [ ] **M1-004 — Implement confidence and missing-information ranking.** Depends on: M1-003. Output: weighted confidence score/label and impact-ranked uncertainty list. Acceptance: user, derived, and default contributions plus thresholds are frozen in tests.
-- [ ] **M1-005 — Implement budget constraint primitives.** Depends on: M1-001. Output: constraint result and violation contracts usable before/after cost calculation. Acceptance: satisfied, violated, and absent-budget cases are tested.
-- [ ] **M1-006 — Freeze the reference normalization scenario.** Depends on: M1-003, M1-004. Output: fixture for 100,000 users, Europe, medium traffic, production availability, and balanced priority. Acceptance: normalized values, assumptions, provenance, confidence, and missing information are deterministic.
-- [ ] **M1-007 — Pass Milestone 1 quality gates.** Depends on: M1-005, M1-006. Output: clean checks and updated implementation status. Acceptance: a Quick Mode input returns the complete normalized result without cloud APIs.
+- [x] **M1-001 — Implement canonical workload schemas.** Depends on: M0-003, M0-005. Output: Zod `WorkloadInput` schema and inferred TypeScript types for Quick and Advanced fields. Acceptance: valid examples pass and invalid ranges/enums fail in unit tests.
+- [x] **M1-002 — Create versioned assumption data and validation.** Depends on: M1-001. Output: `workload-v1.yaml`, schema loader, documented heuristic values, and version identifier. Acceptance: malformed or incomplete configuration fails fast.
+- [x] **M1-003 — Implement normalization and provenance.** Depends on: M1-002. Output: deterministic derivation of request rates, peak, egress, storage, availability target, and region preference with field provenance. Acceptance: user overrides take precedence and no magic heuristic is embedded in engine code.
+- [x] **M1-004 — Implement confidence and missing-information ranking.** Depends on: M1-003. Output: weighted confidence score/label and impact-ranked uncertainty list. Acceptance: user, derived, and default contributions plus thresholds are frozen in tests.
+- [x] **M1-005 — Implement budget constraint primitives.** Depends on: M1-001. Output: constraint result and violation contracts usable before/after cost calculation. Acceptance: satisfied, violated, and absent-budget cases are tested.
+- [x] **M1-006 — Freeze the reference normalization scenario.** Depends on: M1-003, M1-004. Output: fixture for 100,000 users, Europe, medium traffic, production availability, and balanced priority. Acceptance: normalized values, assumptions, provenance, confidence, and missing information are deterministic.
+- [x] **M1-007 — Pass Milestone 1 quality gates.** Depends on: M1-005, M1-006. Output: clean checks and updated implementation status. Acceptance: a Quick Mode input returns the complete normalized result without cloud APIs.
 
 ## Milestone 2 — Semantic cloud catalog
 

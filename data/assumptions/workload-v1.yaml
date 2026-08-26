@@ -1,0 +1,92 @@
+version: workload-v1
+calendar:
+  daysPerMonth: 30
+  secondsPerDay: 86400
+  kilobytesPerGigabyte: 1000000
+trafficProfiles:
+  low:
+    requestsPerUserPerDay: 5
+    peakMultiplier: 2
+  medium:
+    requestsPerUserPerDay: 20
+    peakMultiplier: 3
+  high:
+    requestsPerUserPerDay: 40
+    peakMultiplier: 4
+  spiky:
+    requestsPerUserPerDay: 20
+    peakMultiplier: 10
+defaults:
+  averageResponseKB: 50
+  databaseStorage:
+    minimumGB: 20
+    gbPerThousandUsers: 1
+  objectStorage:
+    minimumGB: 100
+    gbPerThousandUsers: 5
+availabilityTargets:
+  standard: 0.99
+  production: 0.999
+  high: 0.9995
+  mission-critical: 0.9999
+geographyPreferences:
+  Europe: europe
+  North America: north-america
+  South America: south-america
+confidence:
+  sourceContributions:
+    user: 1
+    derived: 0.6
+    default: 0.3
+  thresholds:
+    medium: 0.5
+    high: 0.8
+  factors:
+    requestVolume:
+      field: requestsPerMonth
+      weight: 0.2
+      impact: high
+      missingField: requestsPerMonth
+      description: Direct monthly request volume removes traffic-volume uncertainty.
+    peakRps:
+      field: peakRequestsPerSecond
+      weight: 0.2
+      impact: high
+      missingField: peakRequestsPerSecond
+      description: Direct peak throughput improves compute and load-balancer sizing.
+    egress:
+      field: monthlyEgressGB
+      weight: 0.2
+      impact: high
+      missingField: monthlyEgressGB
+      description: Direct public egress materially improves network-cost accuracy.
+    databaseStorage:
+      field: databaseStorageGB
+      weight: 0.15
+      impact: medium
+      missingField: databaseStorageGB
+      description: Direct database size improves managed PostgreSQL sizing.
+    objectStorage:
+      field: objectStorageGB
+      weight: 0.05
+      impact: medium
+      missingField: objectStorageGB
+      description: Direct object-storage volume improves storage-cost accuracy.
+    responseSize:
+      field: averageResponseKB
+      weight: 0.1
+      impact: medium
+      missingField: averageResponseKB
+      description: Direct average response size improves derived public-egress accuracy.
+    geography:
+      field: geography
+      weight: 0.05
+      impact: high
+      missingField: geography
+      description: Geography determines the supported regional preference.
+    availability:
+      field: availability
+      weight: 0.05
+      impact: high
+      missingField: availability
+      description: Availability intent determines redundancy requirements.

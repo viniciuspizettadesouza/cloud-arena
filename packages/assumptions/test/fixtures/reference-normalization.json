@@ -1,0 +1,62 @@
+{
+  "input": {
+    "applicationType": "web-api",
+    "monthlyActiveUsers": 100000,
+    "geography": { "type": "continent", "value": "Europe" },
+    "trafficProfile": "medium",
+    "availability": "production",
+    "priority": "balanced"
+  },
+  "normalizedValues": {
+    "monthlyActiveUsers": 100000,
+    "requestsPerMonth": 60000000,
+    "averageRequestsPerSecond": 23.148148,
+    "peakRequestsPerSecond": 69.444444,
+    "averageResponseKB": 50,
+    "monthlyEgressGB": 3000,
+    "databaseStorageGB": 100,
+    "objectStorageGB": 500,
+    "availabilityTarget": 0.999,
+    "regionPreference": "europe"
+  },
+  "provenanceSources": {
+    "monthlyActiveUsers": "user",
+    "requestsPerMonth": "derived",
+    "averageRequestsPerSecond": "derived",
+    "peakRequestsPerSecond": "derived",
+    "averageResponseKB": "default",
+    "monthlyEgressGB": "derived",
+    "databaseStorageGB": "derived",
+    "objectStorageGB": "derived",
+    "availabilityTarget": "derived",
+    "regionPreference": "derived"
+  },
+  "assumptionIds": [
+    "traffic.medium.requestsPerUserPerDay",
+    "traffic.medium.peakMultiplier",
+    "defaults.averageResponseKB",
+    "defaults.databaseStorage",
+    "defaults.objectStorage"
+  ],
+  "confidence": 0.61,
+  "confidenceLabel": "medium",
+  "confidenceSources": [
+    "derived",
+    "derived",
+    "derived",
+    "derived",
+    "derived",
+    "default",
+    "user",
+    "user"
+  ],
+  "missingInformation": [
+    "monthlyEgressGB",
+    "peakRequestsPerSecond",
+    "requestsPerMonth",
+    "databaseStorageGB",
+    "averageResponseKB",
+    "objectStorageGB"
+  ],
+  "assumptionsVersion": "workload-v1"
+}

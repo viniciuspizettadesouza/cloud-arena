@@ -1,6 +1,6 @@
 # Implementation Status
 
-Last updated: 2026-08-25
+Last updated: 2026-08-27
 
 ## Completed
 
@@ -21,6 +21,13 @@ Last updated: 2026-08-25
 - M0-005: configured Prettier, ESLint, TypeScript, Vitest, Playwright, Turborepo tasks, and root quality scripts.
 - M0-006: added an unsuppressed GitHub Actions pipeline covering frozen installation, database migration, all quality gates, build, and browser testing.
 - M0-007: documented clean-checkout installation, environment, database, development, test, and build commands.
+- M1-001: implemented strict Zod contracts and inferred types for the canonical Quick and Advanced workload input, normalized workload, provenance, assumptions, confidence, missing information, and budget constraints.
+- M1-002: added validated `workload-v1` YAML heuristics for traffic, storage, availability, geography, and confidence; malformed, incomplete, and internally inconsistent configurations fail fast.
+- M1-003: implemented deterministic request-rate, peak, egress, storage, availability-target, and region-preference normalization with visible assumptions and field-level provenance; explicit overrides take precedence.
+- M1-004: implemented weighted confidence scoring and labels plus deterministic impact-ranked missing information.
+- M1-005: implemented absent, pending, satisfied, and violated monthly-budget constraint states with expected/actual violation details.
+- M1-006: froze the 100,000-user Europe/medium/production/balanced normalization fixture and deterministic output tests.
+- M1-007: passed Milestone 1 format, lint, boundary, type, unit-test, and build quality gates.
 
 ## Deferred
 
@@ -29,15 +36,14 @@ Last updated: 2026-08-25
 
 ## Next
 
-1. Implement canonical workload schemas and tests under M1-001.
-2. Add validated, versioned workload assumptions under M1-002.
+1. Define validated semantic catalog schemas and loaders under M2-001.
+2. Curate initial provider capability/service mappings and launch regions under M2-002 and M2-003.
 3. Keep GCP credential-dependent pricing evidence deferred under SPIKE-A1-GCP; M3-004 and downstream all-provider pricing coverage remain blocked by it.
 
 ## Known limitations
 
-- The API and web application are foundation shells only; comparison, catalog, pricing, scoring, recommendation, and user workflow behavior are not implemented yet.
+- The API and web application are foundation shells only; the domain normalization engine is not exposed through an API route yet, and catalog, pricing, scoring, recommendation, and user workflow behavior are not implemented.
 - The initial database schema contains only foundation metadata; pricing persistence begins in Milestone 3.
-- Initial workload heuristic values and confidence weights/thresholds remain to be frozen in Milestone 1.
 - GCP exact Catalog service/SKU selectors and source pricing expressions remain unresolved until SPIKE-A1-GCP.
 - Calculator totals have not yet been captured; E1 freezes the inputs and M7-002 performs the nine official comparisons.
 - Public derived-price presentation remains subject to `LEGAL-PRICING-001` and M7-004.
