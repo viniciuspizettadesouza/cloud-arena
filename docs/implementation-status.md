@@ -37,6 +37,11 @@ Last updated: 2026-08-27
 - M3-002: implemented a bounded-retry, EOF-validated streaming AWS regional bulk CSV adapter with catalog-baseline selectors, resolved catalog-version traceability, canonical units, source price identities, and frozen representative fixture/parser tests.
 - M3-003: implemented the paginated Azure Retail Prices adapter with trusted next-link validation, repeated-link detection, catalog-baseline selectors, tier derivation, canonical units, source identities, and frozen fixture/parser tests.
 - Added the `pnpm pricing:sync` operational path for all-provider and `--provider aws|azure|gcp` runs. It reports snapshot record/gap counts and records explicit failures; M3-005 remains incomplete until the GCP dependency is resolved.
+- M4-001: added strict available/unavailable estimate, line-item, pricing-trace, inclusion/exclusion, formula, gap, timestamp, confidence, and calculation-version contracts; unavailable estimates cannot carry a fabricated total.
+- M4-002: implemented exact monthly compute, deployment-aware managed PostgreSQL compute, and tiered database-storage formulas with 730-hour and explicit GB/GiB conventions.
+- M4-003: implemented tiered object storage, public egress, and provider-specific load-balancing formulas, including AWS's allowance, Azure's frozen capacity rule, GCP unit conversion, and every accepted egress boundary case.
+- M4-004: added deterministic one/all-candidate estimate assembly and an active-snapshot reader; complete estimates return totals while missing, ambiguous, incompatible, or discontinuous records return explicit unavailable gaps with successful partial lines retained.
+- M4-005: passed repository-wide format, lint, dependency-boundary, typecheck, unit-test, and build gates with cost-contract and 13 cost-engine tests.
 
 ## Deferred
 
@@ -49,12 +54,14 @@ Last updated: 2026-08-27
 1. Supply an intentional GCP caller identity and complete SPIKE-A1-GCP with sanitized authenticated SKU fixtures.
 2. Implement and verify the GCP parser/selectors under M3-004, enabling completion of the existing all-provider sync CLI.
 3. Run live launch-region synchronization, capture the coverage report, and pass the remaining Milestone 3 database and quality gates.
+4. Begin the unblocked Milestone 5 scoring configuration while the GCP credential-dependent path remains deferred.
 
 ## Known limitations
 
-- The API and web application are foundation shells only; the implemented normalization and catalog candidate-generation engines are not exposed through API routes yet, and pricing, scoring, recommendation, and user workflow behavior are not implemented.
+- The API and web application are foundation shells only; the implemented normalization, catalog candidate-generation, pricing-ingestion, and cost engines are not exposed through API routes yet, and scoring, recommendation, and user workflow behavior are not implemented.
 - Pricing persistence and AWS/Azure adapters are implemented, but no committed snapshot is treated as current public pricing; operators must migrate the local database and run the live sync command.
 - GCP exact Catalog service/SKU selectors and source pricing expressions remain unresolved until SPIKE-A1-GCP.
+- GCP candidate estimates therefore remain explicitly unavailable with live data until the authenticated pricing gap is resolved; frozen tests verify the calculation behavior without treating those fixtures as current prices.
 - Calculator totals have not yet been captured; E1 freezes the inputs and M7-002 performs the nine official comparisons.
 - Public derived-price presentation remains subject to `LEGAL-PRICING-001` and M7-004.
 - Competitor notes are directional and require revalidation before public use.

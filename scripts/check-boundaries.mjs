@@ -5,6 +5,15 @@ const root = process.cwd();
 const allowed = new Map([
   ["@cloud-arena/domain", []],
   ["@cloud-arena/contracts", ["@cloud-arena/domain"]],
+  [
+    "@cloud-arena/cost",
+    [
+      "@cloud-arena/assumptions",
+      "@cloud-arena/catalog",
+      "@cloud-arena/contracts",
+      "@cloud-arena/pricing",
+    ],
+  ],
   ["@cloud-arena/catalog", ["@cloud-arena/contracts", "@cloud-arena/domain"]],
   ["@cloud-arena/assumptions", ["@cloud-arena/contracts", "@cloud-arena/domain"]],
   ["@cloud-arena/pricing", ["@cloud-arena/contracts", "@cloud-arena/domain"]],

@@ -1,0 +1,26 @@
+{
+  "name": "@cloud-arena/cost",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src test --max-warnings 0",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@cloud-arena/catalog": "workspace:*",
+    "@cloud-arena/contracts": "workspace:*",
+    "@cloud-arena/pricing": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloud-arena/assumptions": "workspace:*"
+  }
+}

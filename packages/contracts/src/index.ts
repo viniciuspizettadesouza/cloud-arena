@@ -132,6 +132,90 @@ export const budgetConstraintResultSchema = z.strictObject({
 });
 export type BudgetConstraintResult = z.infer<typeof budgetConstraintResultSchema>;
 
+const costTextSchema = z.string().trim().min(1);
+const costAmountSchema = z.number().finite().nonnegative();
+
+export const costLineItemIdSchema = z.enum([
+  "compute",
+  "database-compute",
+  "database-storage",
+  "object-storage",
+  "load-balancer",
+  "public-egress",
+]);
+export type CostLineItemId = z.infer<typeof costLineItemIdSchema>;
+
+export const pricingTraceSchema = z.strictObject({
+  pricingRecordId: costTextSchema,
+  snapshotId: costTextSchema,
+  rawPayloadId: costTextSchema,
+  provider: z.enum(["aws", "azure", "gcp"]),
+  serviceName: costTextSchema,
+  skuId: costTextSchema,
+  skuName: costTextSchema.optional(),
+  region: costTextSchema,
+  unit: costTextSchema,
+  unitPriceUSD: costTextSchema,
+  sourcePriceId: costTextSchema,
+  source: costTextSchema,
+  retrievedAt: z.iso.datetime({ offset: true }),
+  tierStart: costTextSchema,
+  tierEnd: costTextSchema.optional(),
+});
+export type PricingTrace = z.infer<typeof pricingTraceSchema>;
+
+export const costLineItemSchema = z.strictObject({
+  id: costLineItemIdSchema,
+  capabilityId: costTextSchema,
+  description: costTextSchema,
+  quantity: costAmountSchema,
+  unit: costTextSchema,
+  unitPriceUSD: costAmountSchema.nullable(),
+  monthlyCostUSD: costAmountSchema,
+  formula: costTextSchema,
+  pricing: z.array(pricingTraceSchema).min(1),
+});
+export type CostLineItem = z.infer<typeof costLineItemSchema>;
+
+export const costEstimateGapSchema = z.strictObject({
+  category: z.enum([
+    "compute",
+    "database-compute",
+    "database-storage",
+    "object-storage",
+    "load-balancer-hour",
+    "load-balancer-capacity",
+    "public-egress",
+  ]),
+  reason: costTextSchema,
+});
+export type CostEstimateGap = z.infer<typeof costEstimateGapSchema>;
+
+const costEstimateFields = {
+  currency: z.literal("USD"),
+  lineItems: z.array(costLineItemSchema),
+  includedItems: z.array(costTextSchema),
+  excludedItems: z.array(costTextSchema),
+  pricingSnapshotAt: z.iso.datetime({ offset: true }).optional(),
+  confidence: z.number().finite().min(0).max(1),
+  calculationVersion: costTextSchema,
+};
+
+export const costEstimateSchema = z.discriminatedUnion("status", [
+  z.strictObject({
+    status: z.literal("available"),
+    ...costEstimateFields,
+    monthlyCostUSD: costAmountSchema,
+    gaps: z.tuple([]),
+  }),
+  z.strictObject({
+    status: z.literal("unavailable"),
+    ...costEstimateFields,
+    gaps: z.array(costEstimateGapSchema).min(1),
+  }),
+]);
+export type CostEstimate = z.infer<typeof costEstimateSchema>;
+
 export interface ProviderReference {
   provider: CloudProvider;
 }

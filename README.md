@@ -41,6 +41,7 @@ Zod, OpenAPI, Pino, Tailwind CSS, and the component system are introduced by the
 - [MVP definition](docs/product/mvp.md)
 - [Architecture overview](docs/architecture/overview.md)
 - [Domain model](docs/architecture/domain-model.md)
+- [Cost engine](docs/architecture/cost-engine.md)
 - [API contract](docs/architecture/api.md)
 - [Assumptions and confidence](docs/assumptions.md)
 - [Scoring](docs/scoring.md)
@@ -69,4 +70,4 @@ Follow the [developer setup](docs/development.md) for exact installation, databa
 
 ## Current status
 
-Documentation, the non-GCP technical spikes, and Milestones 0–2 are complete. Milestone 3 now has atomic pricing snapshot persistence plus tested AWS and Azure adapters and a sync CLI. Authenticated GCP pricing evidence and selectors remain intentionally deferred under `SPIKE-A1-GCP`, so GCP activation, all-provider coverage, and the Milestone 3 quality gate remain open rather than using fabricated prices.
+Documentation, the non-GCP technical spikes, and Milestones 0–2 and 4 are complete. Milestone 3 has atomic pricing snapshot persistence plus tested AWS and Azure adapters and a sync CLI. The cost engine produces traceable available/unavailable candidate estimates without fabricated totals. Authenticated GCP pricing evidence and selectors remain intentionally deferred under `SPIKE-A1-GCP`, so GCP activation, all-provider coverage, and the Milestone 3 quality gate remain open.

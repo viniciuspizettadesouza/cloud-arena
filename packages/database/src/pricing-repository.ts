@@ -4,6 +4,9 @@ import { and, eq, lt, ne } from "drizzle-orm";
 
 import {
   PricingSyncError,
+  type ActivePricingSnapshot,
+  type ActivePricingSnapshotReader,
+  type PersistedPricingRecord,
   type PricingAdapterResult,
   type PricingSnapshotRepository,
   type PricingSnapshotStart,
@@ -222,5 +225,67 @@ export class PostgresPricingSnapshotRepository implements PricingSnapshotReposit
       .where(
         and(eq(pricingSyncLocks.provider, provider), eq(pricingSyncLocks.snapshotId, snapshotId)),
       );
+  }
+}
+
+export class PostgresActivePricingSnapshotReader implements ActivePricingSnapshotReader {
+  readonly #db: Database;
+
+  constructor(db: Database) {
+    this.#db = db;
+  }
+
+  async getActiveSnapshot(
+    provider: ActivePricingSnapshot["provider"],
+  ): Promise<ActivePricingSnapshot | undefined> {
+    const [snapshot] = await this.#db
+      .select({ id: pricingSnapshots.id, retrievedAt: pricingSnapshots.retrievedAt })
+      .from(pricingSnapshots)
+      .where(
+        and(
+          eq(pricingSnapshots.provider, provider),
+          eq(pricingSnapshots.status, "active"),
+          eq(pricingSnapshots.isActive, true),
+        ),
+      );
+    if (snapshot === undefined || snapshot.retrievedAt === null) return undefined;
+    const records = await this.#db
+      .select()
+      .from(pricingRecords)
+      .where(eq(pricingRecords.snapshotId, snapshot.id));
+    return {
+      id: snapshot.id,
+      provider,
+      retrievedAt: snapshot.retrievedAt.toISOString(),
+      records: records.map((record) => ({
+        id: record.id,
+        snapshotId: record.snapshotId,
+        rawPayloadId: record.rawPayloadId,
+        provider,
+        serviceCategory:
+          record.serviceCategory as ActivePricingSnapshot["records"][number]["serviceCategory"],
+        serviceName: record.serviceName,
+        skuId: record.skuId,
+        ...(record.skuName === null ? {} : { skuName: record.skuName }),
+        region: record.region,
+        pricingModel: "on-demand",
+        unit: record.unit,
+        unitPrice: record.unitPrice,
+        currency: "USD",
+        ...(record.effectiveAt === null ? {} : { effectiveAt: record.effectiveAt.toISOString() }),
+        retrievedAt: record.retrievedAt.toISOString(),
+        source: record.source,
+        sourcePriceId: record.sourcePriceId,
+        sourceUnit: record.sourceUnit,
+        sourceUnitPrice: record.sourceUnitPrice,
+        unitConversionFactor: record.unitConversionFactor,
+        tierStart: record.tierStart,
+        ...(record.tierEnd === null ? {} : { tierEnd: record.tierEnd }),
+        ...(record.catalogPublishedAt === null
+          ? {}
+          : { catalogPublishedAt: record.catalogPublishedAt.toISOString() }),
+        sourceAttributes: record.sourceAttributes as PersistedPricingRecord["sourceAttributes"],
+      })),
+    };
   }
 }

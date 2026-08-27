@@ -64,11 +64,11 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 4 — Cost engine
 
-- [ ] **M4-001 — Define cost calculation contracts.** Depends on: M3-001, M2-005. Output: estimate, status, line item, inclusion/exclusion, formula, and traceability schemas. Acceptance: unavailable data is representable without a fake total.
-- [ ] **M4-002 — Implement compute and managed-database costs.** Depends on: M4-001, M3-006. Output: monthly compute, database compute, and database storage formulas. Acceptance: quantity, unit conversions, unit price, record ID, formula, and result are test-visible.
-- [ ] **M4-003 — Implement storage, egress, and load-balancing costs.** Depends on: M4-001, SPIKE-C1, M3-006. Output: object storage, tiered public egress, and load-balancing formulas. Acceptance: free/tier boundaries and provider-specific units have boundary tests.
-- [ ] **M4-004 — Assemble candidate estimates.** Depends on: M4-002, M4-003. Output: total, breakdown, included/excluded items, snapshot time, and confidence. Acceptance: missing required records propagate explicit unavailable status.
-- [ ] **M4-005 — Pass Milestone 4 quality gates.** Depends on: M4-004. Output: formula/unit tests and status update. Acceptance: every reference candidate returns a traceable available or unavailable estimate.
+- [x] **M4-001 — Define cost calculation contracts.** Depends on: M3-001, M2-005. Output: estimate, status, line item, inclusion/exclusion, formula, and traceability schemas. Acceptance: unavailable data is representable without a fake total.
+- [x] **M4-002 — Implement compute and managed-database costs.** Depends on: M4-001, M3-006. Output: monthly compute, database compute, and database storage formulas. Acceptance: quantity, unit conversions, unit price, record ID, formula, and result are test-visible.
+- [x] **M4-003 — Implement storage, egress, and load-balancing costs.** Depends on: M4-001, SPIKE-C1, M3-006. Output: object storage, tiered public egress, and load-balancing formulas. Acceptance: free/tier boundaries and provider-specific units have boundary tests.
+- [x] **M4-004 — Assemble candidate estimates.** Depends on: M4-002, M4-003. Output: total, breakdown, included/excluded items, snapshot time, and confidence. Acceptance: missing required records propagate explicit unavailable status.
+- [x] **M4-005 — Pass Milestone 4 quality gates.** Depends on: M4-004. Output: formula/unit tests and status update. Acceptance: every reference candidate returns a traceable available or unavailable estimate.
 
 ## Milestone 5 — Recommendation engine and API
 

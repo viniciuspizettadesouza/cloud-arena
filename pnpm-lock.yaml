@@ -122,6 +122,22 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
 
+  packages/cost:
+    dependencies:
+      '@cloud-arena/catalog':
+        specifier: workspace:*
+        version: link:../catalog
+      '@cloud-arena/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@cloud-arena/pricing':
+        specifier: workspace:*
+        version: link:../pricing
+    devDependencies:
+      '@cloud-arena/assumptions':
+        specifier: workspace:*
+        version: link:../assumptions
+
   packages/database:
     dependencies:
       '@cloud-arena/pricing':

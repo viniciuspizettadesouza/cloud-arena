@@ -52,6 +52,23 @@ export interface PricingRecord {
   sourceAttributes: Record<string, string | number | boolean | null>;
 }
 
+export interface PersistedPricingRecord extends Omit<PricingRecord, "rawPayloadIndex"> {
+  id: string;
+  snapshotId: string;
+  rawPayloadId: string;
+}
+
+export interface ActivePricingSnapshot {
+  id: string;
+  provider: CloudProvider;
+  retrievedAt: string;
+  records: PersistedPricingRecord[];
+}
+
+export interface ActivePricingSnapshotReader {
+  getActiveSnapshot(provider: CloudProvider): Promise<ActivePricingSnapshot | undefined>;
+}
+
 export interface RawPricingPayload {
   source: string;
   retrievedAt: string;

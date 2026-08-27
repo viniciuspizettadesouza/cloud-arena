@@ -116,28 +116,35 @@ interface PricingRecord {
 }
 
 interface CostLineItem {
-  capability: string;
+  id: "compute" | "database-compute" | "database-storage" | "object-storage" | "load-balancer" | "public-egress";
+  capabilityId: string;
   description: string;
   quantity: number;
   unit: string;
-  unitPrice: number;
+  unitPriceUSD: number | null;
   monthlyCostUSD: number;
-  pricingRecordId: string;
   formula: string;
+  pricing: PricingTrace[];
 }
 
 interface CostEstimate {
   status: "available" | "unavailable";
+  currency: "USD";
   monthlyCostUSD?: number;
   lineItems: CostLineItem[];
   includedItems: string[];
   excludedItems: string[];
+  gaps: CostEstimateGap[];
   pricingSnapshotAt?: string;
   confidence: number;
+  calculationVersion: string;
 }
 ```
 
 Initial line items cover compute, database compute and storage, object storage, network egress, and load balancing. A missing required price makes the affected estimate unavailable.
+
+The implemented formulas, unit rules, and unavailable-data behavior are
+specified in [cost-engine.md](cost-engine.md).
 
 ## Constraints and scoring
 
