@@ -7,11 +7,17 @@
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsx watch src/server.ts",
     "lint": "eslint src test vitest.config.ts --max-warnings 0",
+    "pricing:sync": "tsx src/pricing-sync.ts",
     "start": "node dist/server.js",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@cloud-arena/database": "workspace:*",
+    "@cloud-arena/pricing": "workspace:*",
+    "@cloud-arena/provider-aws": "workspace:*",
+    "@cloud-arena/provider-azure": "workspace:*",
+    "@cloud-arena/provider-gcp": "workspace:*",
     "fastify": "5.12.1"
   },
   "devDependencies": {

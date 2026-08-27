@@ -54,11 +54,11 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 3 — Pricing adapters
 
-- [ ] **M3-001 — Implement pricing snapshot persistence.** Depends on: M0-004, SPIKE-A2. Output: migrations/repositories for snapshots, normalized records, source payload traceability, and retrieval timestamps. Acceptance: partial failed syncs cannot become the active snapshot.
-- [ ] **M3-002 — Implement AWS adapter and parser tests.** Depends on: M3-001, SPIKE-A1. Output: paginated AWS fetcher plus frozen fixture parser. Acceptance: required baseline records normalize with correct units, region, SKU, and source.
-- [ ] **M3-003 — Implement Azure adapter and parser tests.** Depends on: M3-001, SPIKE-A1. Output: paginated Azure Retail Prices fetcher plus frozen fixture parser. Acceptance: same normalized invariants as AWS are verified.
+- [x] **M3-001 — Implement pricing snapshot persistence.** Depends on: M0-004, SPIKE-A2. Output: migrations/repositories for snapshots, normalized records, source payload traceability, and retrieval timestamps. Acceptance: partial failed syncs cannot become the active snapshot.
+- [x] **M3-002 — Implement AWS adapter and parser tests.** Depends on: M3-001, SPIKE-A1. Output: streamed AWS regional bulk-file fetcher plus frozen fixture parser. Acceptance: selected records normalize with correct units, region, SKU, source-price identity, and raw source reference; live selection targets the catalog baseline while the research fixture remains explicitly representative.
+- [x] **M3-003 — Implement Azure adapter and parser tests.** Depends on: M3-001, SPIKE-A1. Output: paginated Azure Retail Prices fetcher plus frozen fixture parser. Acceptance: same normalized invariants as AWS are verified.
 - [ ] **M3-004 — Implement GCP adapter and parser tests.** Depends on: M3-001, SPIKE-A1-GCP. Output: authenticated Cloud Billing Catalog fetcher plus frozen fixture parser. Acceptance: same normalized invariants are verified and missing credentials produce actionable errors.
-- [ ] **M3-005 — Implement pricing sync CLI.** Depends on: M3-002, M3-003, M3-004. Output: `pnpm pricing:sync` and `--provider aws|azure|gcp`, logging, retries, and atomic activation. Acceptance: all-provider and individual runs are repeatable and report counts/gaps.
+- [ ] **M3-005 — Implement pricing sync CLI.** Depends on: M3-002, M3-003, M3-004. Output: `pnpm pricing:sync` and `--provider aws|azure|gcp`, logging, retries, and atomic activation. Acceptance: all-provider and individual runs are repeatable and report counts/gaps. The CLI, bounded retries, per-provider concurrency, and atomic activation are implemented; completion remains blocked by M3-004.
 - [ ] **M3-006 — Verify baseline price coverage.** Depends on: M3-005, M2-005. Output: coverage report by provider, region, capability, and SKU. Acceptance: every candidate component has current public pricing or an explicit blocking gap.
 - [ ] **M3-007 — Pass Milestone 3 quality gates.** Depends on: M3-006. Output: clean checks, fixture-only normal tests, and status update. Acceptance: local database contains a traceable active snapshot.
 

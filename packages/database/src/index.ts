@@ -1,2 +1,3 @@
-export { createDatabase } from "./client.js";
-export { systemMetadata } from "./schema.js";
+export { createDatabase, type Database } from "./client.js";
+export { PostgresPricingSnapshotRepository } from "./pricing-repository.js";
+export * from "./schema.js";

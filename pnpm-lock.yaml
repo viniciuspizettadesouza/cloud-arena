@@ -41,6 +41,21 @@ importers:
 
   apps/api:
     dependencies:
+      '@cloud-arena/database':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@cloud-arena/pricing':
+        specifier: workspace:*
+        version: link:../../packages/pricing
+      '@cloud-arena/provider-aws':
+        specifier: workspace:*
+        version: link:../../packages/providers/aws
+      '@cloud-arena/provider-azure':
+        specifier: workspace:*
+        version: link:../../packages/providers/azure
+      '@cloud-arena/provider-gcp':
+        specifier: workspace:*
+        version: link:../../packages/providers/gcp
       fastify:
         specifier: 5.12.1
         version: 5.12.1
@@ -109,6 +124,9 @@ importers:
 
   packages/database:
     dependencies:
+      '@cloud-arena/pricing':
+        specifier: workspace:*
+        version: link:../pricing
       drizzle-orm:
         specifier: 0.45.2
         version: 0.45.2(postgres@3.4.9)
@@ -139,18 +157,27 @@ importers:
       '@cloud-arena/domain':
         specifier: workspace:*
         version: link:../../domain
+      '@cloud-arena/pricing':
+        specifier: workspace:*
+        version: link:../../pricing
 
   packages/providers/azure:
     dependencies:
       '@cloud-arena/domain':
         specifier: workspace:*
         version: link:../../domain
+      '@cloud-arena/pricing':
+        specifier: workspace:*
+        version: link:../../pricing
 
   packages/providers/gcp:
     dependencies:
       '@cloud-arena/domain':
         specifier: workspace:*
         version: link:../../domain
+      '@cloud-arena/pricing':
+        specifier: workspace:*
+        version: link:../../pricing
 
   packages/recommendation:
     dependencies:

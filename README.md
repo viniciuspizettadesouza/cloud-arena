@@ -69,4 +69,4 @@ Follow the [developer setup](docs/development.md) for exact installation, databa
 
 ## Current status
 
-Documentation, the non-GCP technical spikes, and Milestones 0–1 are complete. The workspace now has runnable API and web shells plus a deterministic workload-normalization engine with validated contracts, versioned assumptions, provenance, confidence, missing-information ranking, and budget constraints. Milestone 2 semantic catalog implementation is next; authenticated GCP pricing evidence remains intentionally deferred.
+Documentation, the non-GCP technical spikes, and Milestones 0–2 are complete. Milestone 3 now has atomic pricing snapshot persistence plus tested AWS and Azure adapters and a sync CLI. Authenticated GCP pricing evidence and selectors remain intentionally deferred under `SPIKE-A1-GCP`, so GCP activation, all-provider coverage, and the Milestone 3 quality gate remain open rather than using fabricated prices.

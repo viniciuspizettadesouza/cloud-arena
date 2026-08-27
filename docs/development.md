@@ -75,3 +75,20 @@ pnpm test:e2e
 
 Use `pnpm format` to apply formatting. Normal unit tests use local fixtures and do not call live cloud
 pricing APIs.
+
+## Pricing synchronization
+
+Apply database migrations, then synchronize every provider or one provider:
+
+```sh
+pnpm pricing:sync
+pnpm pricing:sync --provider aws
+pnpm pricing:sync --provider azure
+pnpm pricing:sync --provider gcp
+```
+
+AWS and Azure use their public pricing endpoints with bounded retries. GCP exits with an actionable
+configuration error until `SPIKE-A1-GCP` supplies authenticated fixtures and reviewed SKU selectors;
+an all-provider run therefore reports the AWS/Azure outcomes and exits nonzero for the explicit GCP
+gap. A provider snapshot activates only after every requested launch region and baseline category is
+present and validated. Failed or partial snapshots never replace the previous active snapshot.
