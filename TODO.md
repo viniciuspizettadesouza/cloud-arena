@@ -72,14 +72,14 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 5 — Recommendation engine and API
 
-- [ ] **M5-001 — Implement versioned scoring configuration.** Depends on: M1-001. Output: validated `data/scoring/v1.yaml` with balanced, cost, reliability, and low-operations profiles. Acceptance: weights sum correctly and performance is absent.
-- [ ] **M5-002 — Implement score dimensions and classification.** Depends on: M5-001, M4-004. Output: cost, reliability-fit, operational-simplicity, and portability scores with source/confidence/reasons. Acceptance: objective and heuristic inputs are never mislabeled.
-- [ ] **M5-003 — Evaluate constraints against estimates.** Depends on: M1-005, M4-004. Output: explicit budget constraint results per candidate. Acceptance: expected and actual values are returned and remain separate from score.
-- [ ] **M5-004 — Implement deterministic ranking and explanations.** Depends on: M5-002, M5-003. Output: ordered candidates, recommendation, reasons, caveats, runner-up trade-offs, and tie behavior. Acceptance: versions are fixed, violations are disclosed, and no provider is hardcoded to win.
-- [ ] **M5-005 — Implement reference-data API endpoints.** Depends on: M0-002, M2-003. Output: health, providers, regions, and capabilities routes with Zod/OpenAPI. Acceptance: route integration tests match schemas.
-- [ ] **M5-006 — Implement normalization and comparison endpoints.** Depends on: M1-007, M5-004, M5-005. Output: `POST /v1/workloads/normalize` and `POST /v1/compare`. Acceptance: responses contain input, normalized workload, candidates, recommendation, assumptions, missing information, confidence, and all version metadata.
-- [ ] **M5-007 — Test error and unavailable-data paths.** Depends on: M5-006. Output: integration tests for invalid input, missing snapshot/record, constraint violations, and provider-specific gaps. Acceptance: errors and unavailable estimates are distinguishable and no fabricated price appears.
-- [ ] **M5-008 — Pass Milestone 5 quality gates.** Depends on: M5-007. Output: clean checks, generated OpenAPI, deterministic API golden test, and status update. Acceptance: `/v1/compare` returns a complete comparison.
+- [x] **M5-001 — Implement versioned scoring configuration.** Depends on: M1-001. Output: validated `data/scoring/v1.yaml` with balanced, cost, reliability, and low-operations profiles. Acceptance: weights sum correctly and performance is absent.
+- [x] **M5-002 — Implement score dimensions and classification.** Depends on: M5-001, M4-004. Output: cost, reliability-fit, operational-simplicity, and portability scores with source/confidence/reasons. Acceptance: objective and heuristic inputs are never mislabeled.
+- [x] **M5-003 — Evaluate constraints against estimates.** Depends on: M1-005, M4-004. Output: explicit budget constraint results per candidate. Acceptance: expected and actual values are returned and remain separate from score.
+- [x] **M5-004 — Implement deterministic ranking and explanations.** Depends on: M5-002, M5-003. Output: ordered candidates, recommendation, reasons, caveats, runner-up trade-offs, and tie behavior. Acceptance: versions are fixed, violations are disclosed, and no provider is hardcoded to win.
+- [x] **M5-005 — Implement reference-data API endpoints.** Depends on: M0-002, M2-003. Output: health, providers, regions, and capabilities routes with Zod/OpenAPI. Acceptance: route integration tests match schemas.
+- [x] **M5-006 — Implement normalization and comparison endpoints.** Depends on: M1-007, M5-004, M5-005. Output: `POST /v1/workloads/normalize` and `POST /v1/compare`. Acceptance: responses contain input, normalized workload, candidates, recommendation, assumptions, missing information, confidence, and all version metadata.
+- [x] **M5-007 — Test error and unavailable-data paths.** Depends on: M5-006. Output: integration tests for invalid input, missing snapshot/record, constraint violations, and provider-specific gaps. Acceptance: errors and unavailable estimates are distinguishable and no fabricated price appears.
+- [x] **M5-008 — Pass Milestone 5 quality gates.** Depends on: M5-007. Output: clean checks, generated OpenAPI, deterministic API golden test, and status update. Acceptance: `/v1/compare` returns a complete comparison.
 
 ## Milestone 6 — Frontend
 

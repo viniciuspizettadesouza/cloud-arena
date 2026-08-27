@@ -11,13 +11,17 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "lint": "eslint src --max-warnings 0",
-    "test": "vitest run --passWithNoTests",
+    "lint": "eslint src test --max-warnings 0",
+    "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@cloud-arena/domain": "workspace:*",
+    "@cloud-arena/assumptions": "workspace:*",
+    "@cloud-arena/catalog": "workspace:*",
+    "@cloud-arena/contracts": "workspace:*",
+    "@cloud-arena/cost": "workspace:*",
     "@cloud-arena/pricing": "workspace:*",
-    "@cloud-arena/scoring": "workspace:*"
+    "@cloud-arena/scoring": "workspace:*",
+    "zod": "^4.4.3"
   }
 }

@@ -32,6 +32,7 @@ packages/
   pricing/
   recommendation/
   scoring/
+  cost/
   providers/
     aws/
     azure/
@@ -75,4 +76,3 @@ Every displayed price must be traceable to provider, service, SKU, region, unit,
 ## Reliability and future evolution
 
 The separated normalization, candidate generation, pricing, constraints, and scoring stages preserve determinism and support future sensitivity analysis. The MVP does not claim real latency or objective performance. Additional patterns are introduced only after the baseline pricing path is trustworthy.
-

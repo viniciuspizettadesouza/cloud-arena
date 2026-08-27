@@ -70,4 +70,4 @@ Follow the [developer setup](docs/development.md) for exact installation, databa
 
 ## Current status
 
-Documentation, the non-GCP technical spikes, and Milestones 0–2 and 4 are complete. Milestone 3 has atomic pricing snapshot persistence plus tested AWS and Azure adapters and a sync CLI. The cost engine produces traceable available/unavailable candidate estimates without fabricated totals. Authenticated GCP pricing evidence and selectors remain intentionally deferred under `SPIKE-A1-GCP`, so GCP activation, all-provider coverage, and the Milestone 3 quality gate remain open.
+Documentation, the non-GCP technical spikes, and Milestones 0–2, 4, and 5 are complete. The API now exposes reference data, normalization, deterministic comparison/ranking, structured explanations, and generated OpenAPI. Milestone 3 has atomic pricing snapshot persistence plus tested AWS and Azure adapters and a sync CLI. Authenticated GCP pricing evidence and selectors remain intentionally deferred under `SPIKE-A1-GCP`, so live GCP estimates remain explicitly unavailable rather than using fabricated prices.

@@ -42,6 +42,12 @@ Last updated: 2026-08-27
 - M4-003: implemented tiered object storage, public egress, and provider-specific load-balancing formulas, including AWS's allowance, Azure's frozen capacity rule, GCP unit conversion, and every accepted egress boundary case.
 - M4-004: added deterministic one/all-candidate estimate assembly and an active-snapshot reader; complete estimates return totals while missing, ambiguous, incompatible, or discontinuous records return explicit unavailable gaps with successful partial lines retained.
 - M4-005: passed repository-wide format, lint, dependency-boundary, typecheck, unit-test, and build gates with cost-contract and 13 cost-engine tests.
+- M5-001: added validated `scoring-v1` balanced, cost, reliability, and low-operations profiles with exhaustive dimensions, sum-to-one validation, and no performance score.
+- M5-002/M5-003: implemented classified cost, reliability-fit, operational-simplicity, and portability dimensions with explicit objective/rule/heuristic sources and confidence; monthly-budget evaluation remains a separate structured constraint result.
+- M5-004: implemented deterministic availability/constraint/score/cost/stable-ID ranking, unavailable recommendation behavior, reasons, caveats, runner-up trade-offs, and disclosed material ties without provider identity as a scoring input.
+- M5-005/M5-006: implemented Zod-validated provider, region, capability, normalization, and full comparison endpoints plus generated OpenAPI 3.1 at `/openapi.json`; the production server reads active pricing snapshots from PostgreSQL.
+- M5-007: added integration coverage for invalid input, missing snapshots, provider-specific gaps, constraint violations, and persistence failures with distinct validation, unavailable-data, and internal-error results.
+- M5-008: passed repository-wide format, lint, dependency-boundary, typecheck, tests, and build gates; the deterministic reference API response is frozen by a SHA-256 golden assertion.
 
 ## Deferred
 
@@ -54,11 +60,11 @@ Last updated: 2026-08-27
 1. Supply an intentional GCP caller identity and complete SPIKE-A1-GCP with sanitized authenticated SKU fixtures.
 2. Implement and verify the GCP parser/selectors under M3-004, enabling completion of the existing all-provider sync CLI.
 3. Run live launch-region synchronization, capture the coverage report, and pass the remaining Milestone 3 database and quality gates.
-4. Begin the unblocked Milestone 5 scoring configuration while the GCP credential-dependent path remains deferred.
+4. Begin the unblocked Milestone 6 Quick Mode frontend against the completed comparison API while the GCP credential-dependent path remains deferred.
 
 ## Known limitations
 
-- The API and web application are foundation shells only; the implemented normalization, catalog candidate-generation, pricing-ingestion, and cost engines are not exposed through API routes yet, and scoring, recommendation, and user workflow behavior are not implemented.
+- The normalization and complete comparison pipeline is exposed through the API with generated OpenAPI; the web application remains a foundation shell and does not yet provide the user workflow.
 - Pricing persistence and AWS/Azure adapters are implemented, but no committed snapshot is treated as current public pricing; operators must migrate the local database and run the live sync command.
 - GCP exact Catalog service/SKU selectors and source pricing expressions remain unresolved until SPIKE-A1-GCP.
 - GCP candidate estimates therefore remain explicitly unavailable with live data until the authenticated pricing gap is resolved; frozen tests verify the calculation behavior without treating those fixtures as current prices.

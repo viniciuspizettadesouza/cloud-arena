@@ -12,6 +12,7 @@ Cloud Arena is API-first. Domain logic must not be hidden in frontend server act
 | `GET` | `/v1/capabilities` | List provider-neutral capabilities and mappings suitable for public exposure. |
 | `POST` | `/v1/workloads/normalize` | Validate input and return normalized workload, assumptions, provenance, missing information, and confidence. |
 | `POST` | `/v1/compare` | Generate candidates, estimate costs, evaluate constraints, score/rank alternatives, and return the comparison. |
+| `GET` | `/openapi.json` | Return the generated OpenAPI 3.1 contract for implemented routes. |
 
 An internal pricing synchronization endpoint may be added for development, but the initial operational interface is a CLI rather than public HTTP.
 
@@ -23,7 +24,7 @@ An internal pricing synchronization endpoint may be added for development, but t
 - Every comparison identifies catalog, assumptions, scoring, and pricing snapshot versions.
 - All three providers remain visible even if one has a constraint violation or unavailable pricing.
 - Pricing failures are explicit. The API never silently substitutes invented values.
-- Validation errors and unavailable data must be distinguishable; exact error envelopes will be fixed during implementation.
+- Validation errors return HTTP 400 with `VALIDATION_ERROR` and field issues. Internal failures return HTTP 500 with `INTERNAL_ERROR`. Unavailable pricing remains a successful structured comparison with unavailable estimates and, when no candidate is complete, an unavailable recommendation.
 - Endpoint behavior is deterministic for identical input and dataset/configuration versions.
 
 ## Comparison responsibilities
@@ -34,3 +35,4 @@ Cost details expose modeled components, exclusions, snapshot time, and traceable
 
 OpenAPI documentation is generated from implemented schemas and checked for drift in integration tests.
 
+The production server reads active provider snapshots from PostgreSQL. Tests inject frozen snapshot readers, so ordinary tests never require a database or live cloud API.

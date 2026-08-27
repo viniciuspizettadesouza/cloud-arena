@@ -1,0 +1,42 @@
+version: scoring-v1
+profiles:
+  balanced:
+    cost: 0.35
+    reliability-fit: 0.30
+    operational-simplicity: 0.20
+    portability: 0.15
+  cost:
+    cost: 0.65
+    reliability-fit: 0.15
+    operational-simplicity: 0.15
+    portability: 0.05
+  reliability:
+    cost: 0.20
+    reliability-fit: 0.55
+    operational-simplicity: 0.15
+    portability: 0.10
+  low-operations:
+    cost: 0.25
+    reliability-fit: 0.20
+    operational-simplicity: 0.50
+    portability: 0.05
+heuristics:
+  reliabilityFit:
+    standard: 82
+    production: 92
+    high: 68
+    mission-critical: 38
+    confidence: 0.8
+  operationalSimplicity:
+    base: 100
+    componentPenalty: 4
+    highAvailabilityPenalty: 5
+    globalComponentPenalty: 2
+    confidence: 0.65
+  portability:
+    base: 85
+    excludedCapabilityPenalty: 5
+    confidence: 0.65
+classification:
+  strongMinimum: 80
+  moderateMinimum: 60

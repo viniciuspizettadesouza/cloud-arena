@@ -41,6 +41,18 @@ importers:
 
   apps/api:
     dependencies:
+      '@cloud-arena/assumptions':
+        specifier: workspace:*
+        version: link:../../packages/assumptions
+      '@cloud-arena/catalog':
+        specifier: workspace:*
+        version: link:../../packages/catalog
+      '@cloud-arena/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@cloud-arena/cost':
+        specifier: workspace:*
+        version: link:../../packages/cost
       '@cloud-arena/database':
         specifier: workspace:*
         version: link:../../packages/database
@@ -56,9 +68,18 @@ importers:
       '@cloud-arena/provider-gcp':
         specifier: workspace:*
         version: link:../../packages/providers/gcp
+      '@cloud-arena/recommendation':
+        specifier: workspace:*
+        version: link:../../packages/recommendation
+      '@cloud-arena/scoring':
+        specifier: workspace:*
+        version: link:../../packages/scoring
       fastify:
         specifier: 5.12.1
         version: 5.12.1
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       tsx:
         specifier: 4.23.12
@@ -197,21 +218,39 @@ importers:
 
   packages/recommendation:
     dependencies:
-      '@cloud-arena/domain':
+      '@cloud-arena/assumptions':
         specifier: workspace:*
-        version: link:../domain
+        version: link:../assumptions
+      '@cloud-arena/catalog':
+        specifier: workspace:*
+        version: link:../catalog
+      '@cloud-arena/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@cloud-arena/cost':
+        specifier: workspace:*
+        version: link:../cost
       '@cloud-arena/pricing':
         specifier: workspace:*
         version: link:../pricing
       '@cloud-arena/scoring':
         specifier: workspace:*
         version: link:../scoring
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
 
   packages/scoring:
     dependencies:
-      '@cloud-arena/domain':
+      '@cloud-arena/contracts':
         specifier: workspace:*
-        version: link:../domain
+        version: link:../contracts
+      yaml:
+        specifier: ^2.9.0
+        version: 2.9.0
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
 
 packages:
 

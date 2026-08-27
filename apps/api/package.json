@@ -13,12 +13,19 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@cloud-arena/assumptions": "workspace:*",
+    "@cloud-arena/catalog": "workspace:*",
+    "@cloud-arena/contracts": "workspace:*",
+    "@cloud-arena/cost": "workspace:*",
     "@cloud-arena/database": "workspace:*",
     "@cloud-arena/pricing": "workspace:*",
     "@cloud-arena/provider-aws": "workspace:*",
     "@cloud-arena/provider-azure": "workspace:*",
     "@cloud-arena/provider-gcp": "workspace:*",
-    "fastify": "5.12.1"
+    "@cloud-arena/recommendation": "workspace:*",
+    "@cloud-arena/scoring": "workspace:*",
+    "fastify": "5.12.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "tsx": "4.23.12"
