@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  description: "Evidence-backed public cloud architecture comparisons.",
-  title: "Cloud Arena",
+  description: "Compare AWS, Azure, and Google Cloud architectures with inspectable evidence.",
+  title: "Cloud Arena — Evidence-backed cloud comparison",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

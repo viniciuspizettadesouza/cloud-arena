@@ -48,6 +48,10 @@ Last updated: 2026-08-27
 - M5-005/M5-006: implemented Zod-validated provider, region, capability, normalization, and full comparison endpoints plus generated OpenAPI 3.1 at `/openapi.json`; the production server reads active pricing snapshots from PostgreSQL.
 - M5-007: added integration coverage for invalid input, missing snapshots, provider-specific gaps, constraint violations, and persistence failures with distinct validation, unavailable-data, and internal-error results.
 - M5-008: passed repository-wide format, lint, dependency-boundary, typecheck, tests, and build gates; the deterministic reference API response is frozen by a SHA-256 golden assertion.
+- M6-001/M6-002: implemented an accessible one-minute Quick Mode form and optional Advanced Mode overrides, with canonical shared-contract validation in the browser and API.
+- M6-003/M6-004: implemented recommendation and three-provider summaries, explicit available/unavailable costs and constraints, traceable line items, score dimensions, service configurations, and read-only architecture flows.
+- M6-005: implemented structured reasons, runner-up trade-offs, caveats, assumptions, provenance, confidence, missing information, version metadata, and provider pricing timestamps/status.
+- M6-006/M6-007: added deterministic Playwright coverage for the reference submission, three candidates, cost-gap inspection, assumptions/confidence, and validation errors; repository-wide quality gates and the Chromium flow pass.
 
 ## Deferred
 
@@ -60,11 +64,11 @@ Last updated: 2026-08-27
 1. Supply an intentional GCP caller identity and complete SPIKE-A1-GCP with sanitized authenticated SKU fixtures.
 2. Implement and verify the GCP parser/selectors under M3-004, enabling completion of the existing all-provider sync CLI.
 3. Run live launch-region synchronization, capture the coverage report, and pass the remaining Milestone 3 database and quality gates.
-4. Begin the unblocked Milestone 6 Quick Mode frontend against the completed comparison API while the GCP credential-dependent path remains deferred.
+4. Freeze the Milestone 7 golden scenarios and datasets, then begin official-calculator comparisons.
 
 ## Known limitations
 
-- The normalization and complete comparison pipeline is exposed through the API with generated OpenAPI; the web application remains a foundation shell and does not yet provide the user workflow.
+- The web comparison workflow is complete; live estimates still depend on locally synchronized active pricing snapshots, and missing provider data remains visibly unavailable.
 - Pricing persistence and AWS/Azure adapters are implemented, but no committed snapshot is treated as current public pricing; operators must migrate the local database and run the live sync command.
 - GCP exact Catalog service/SKU selectors and source pricing expressions remain unresolved until SPIKE-A1-GCP.
 - GCP candidate estimates therefore remain explicitly unavailable with live data until the authenticated pricing gap is resolved; frozen tests verify the calculation behavior without treating those fixtures as current prices.

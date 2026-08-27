@@ -83,13 +83,13 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 6 — Frontend
 
-- [ ] **M6-001 — Build the Quick Mode form.** Depends on: M5-006. Output: accessible inputs for application, users, geography, traffic, availability, and priority. Acceptance: client/server validation uses canonical contracts and the reference scenario submits in under one minute.
-- [ ] **M6-002 — Add Advanced Mode overrides.** Depends on: M6-001. Output: optional request, RPS, response, database, storage, egress, budget, managed-service, and lock-in controls. Acceptance: overrides preserve one canonical input model and show validation errors.
-- [ ] **M6-003 — Build recommendation and provider summaries.** Depends on: M6-001. Output: recommended provider summary and three provider cards with cost/status, score, region, pattern, services, and constraints. Acceptance: unavailable estimates and violations remain visible.
-- [ ] **M6-004 — Build comparison details.** Depends on: M6-003. Output: side-by-side table, cost line items/exclusions, score dimensions, and simple read-only architecture nodes. Acceptance: every displayed price and heuristic has inspectable origin/context.
-- [ ] **M6-005 — Build explanation and uncertainty sections.** Depends on: M6-003. Output: reasons, runner-up trade-offs, caveats, assumptions/provenance, confidence, missing information, and pricing timestamp. Acceptance: core facts come from structured fields rather than parsed prose.
-- [ ] **M6-006 — Add end-to-end browser coverage.** Depends on: M6-002, M6-004, M6-005. Output: Playwright reference-flow test. Acceptance: user submits Quick Mode, sees three candidates, opens costs, and inspects assumptions/confidence.
-- [ ] **M6-007 — Pass Milestone 6 quality gates.** Depends on: M6-006. Output: clean checks including Playwright, accessibility review, and status update. Acceptance: a non-expert completes and understands the reference comparison.
+- [x] **M6-001 — Build the Quick Mode form.** Depends on: M5-006. Output: accessible inputs for application, users, geography, traffic, availability, and priority. Acceptance: client/server validation uses canonical contracts and the reference scenario submits in under one minute.
+- [x] **M6-002 — Add Advanced Mode overrides.** Depends on: M6-001. Output: optional request, RPS, response, database, storage, egress, budget, managed-service, and lock-in controls. Acceptance: overrides preserve one canonical input model and show validation errors.
+- [x] **M6-003 — Build recommendation and provider summaries.** Depends on: M6-001. Output: recommended provider summary and three provider cards with cost/status, score, region, pattern, services, and constraints. Acceptance: unavailable estimates and violations remain visible.
+- [x] **M6-004 — Build comparison details.** Depends on: M6-003. Output: side-by-side table, cost line items/exclusions, score dimensions, and simple read-only architecture nodes. Acceptance: every displayed price and heuristic has inspectable origin/context.
+- [x] **M6-005 — Build explanation and uncertainty sections.** Depends on: M6-003. Output: reasons, runner-up trade-offs, caveats, assumptions/provenance, confidence, missing information, and pricing timestamp. Acceptance: core facts come from structured fields rather than parsed prose.
+- [x] **M6-006 — Add end-to-end browser coverage.** Depends on: M6-002, M6-004, M6-005. Output: Playwright reference-flow test. Acceptance: user submits Quick Mode, sees three candidates, opens costs, and inspects assumptions/confidence.
+- [x] **M6-007 — Pass Milestone 6 quality gates.** Depends on: M6-006. Output: clean checks including Playwright, accessibility review, and status update. Acceptance: a non-expert completes and understands the reference comparison.
 
 ## Milestone 7 — Validation and MVP completion
 
