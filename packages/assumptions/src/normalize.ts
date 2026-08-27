@@ -304,6 +304,7 @@ export function normalizeWorkload(
     monthlyEgressGB,
     databaseStorageGB,
     objectStorageGB,
+    availability: input.availability,
     availabilityTarget,
     regionPreference,
     provenance: fieldProvenance,

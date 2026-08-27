@@ -51,6 +51,7 @@ interface NormalizedWorkload {
   monthlyEgressGB: number;
   databaseStorageGB: number;
   objectStorageGB: number;
+  availability: "standard" | "production" | "high" | "mission-critical";
   availabilityTarget: number;
   regionPreference: string;
   provenance: FieldProvenance[];

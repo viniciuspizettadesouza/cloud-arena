@@ -16,6 +16,7 @@
     "monthlyEgressGB": 3000,
     "databaseStorageGB": 100,
     "objectStorageGB": 500,
+    "availability": "production",
     "availabilityTarget": 0.999,
     "regionPreference": "europe"
   },

@@ -85,9 +85,18 @@ importers:
 
   packages/catalog:
     dependencies:
+      '@cloud-arena/contracts':
+        specifier: workspace:*
+        version: link:../contracts
       '@cloud-arena/domain':
         specifier: workspace:*
         version: link:../domain
+      yaml:
+        specifier: ^2.9.0
+        version: 2.9.0
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
 
   packages/contracts:
     dependencies:

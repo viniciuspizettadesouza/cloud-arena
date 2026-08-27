@@ -1,0 +1,112 @@
+version: catalog-v1
+regions:
+  - &awsEurope
+    id: aws.eu-west-1
+    provider: aws
+    code: eu-west-1
+    name: Europe (Ireland)
+    geography: europe
+    country: Ireland
+    selectable: true
+    evidence: &awsRegionEvidence
+      - title: AWS Regions and Availability Zones
+        url: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
+        retrievedAt: 2026-08-25
+  - <<: *awsEurope
+    id: aws.us-east-1
+    code: us-east-1
+    name: US East (N. Virginia)
+    geography: north-america
+    country: United States
+  - <<: *awsEurope
+    id: aws.sa-east-1
+    code: sa-east-1
+    name: South America (São Paulo)
+    geography: south-america
+    country: Brazil
+  - &azureEurope
+    id: azure.westeurope
+    provider: azure
+    code: westeurope
+    name: West Europe
+    geography: europe
+    country: Netherlands
+    selectable: true
+    evidence: &azureRegionEvidence
+      - title: Azure geographies and regions
+        url: https://learn.microsoft.com/azure/reliability/regions-list
+        retrievedAt: 2026-08-25
+  - <<: *azureEurope
+    id: azure.eastus
+    code: eastus
+    name: East US
+    geography: north-america
+    country: United States
+  - <<: *azureEurope
+    id: azure.brazilsouth
+    code: brazilsouth
+    name: Brazil South
+    geography: south-america
+    country: Brazil
+  - &gcpEurope
+    id: gcp.europe-west1
+    provider: gcp
+    code: europe-west1
+    name: Belgium
+    geography: europe
+    country: Belgium
+    selectable: true
+    evidence: &gcpRegionEvidence
+      - title: Google Cloud global locations
+        url: https://cloud.google.com/about/locations
+        retrievedAt: 2026-08-25
+  - <<: *gcpEurope
+    id: gcp.us-east4
+    code: us-east4
+    name: Northern Virginia
+    geography: north-america
+    country: United States
+  - <<: *gcpEurope
+    id: gcp.southamerica-east1
+    code: southamerica-east1
+    name: São Paulo
+    geography: south-america
+    country: Brazil
+
+geographyDefaults:
+  - &default
+    geography: europe
+    provider: aws
+    regionId: aws.eu-west-1
+    selectionRationale: Deterministic catalog default with the complete evidenced baseline service set; this is not a latency measurement.
+    latencyClaim: false
+  - <<: *default
+    provider: azure
+    regionId: azure.westeurope
+  - <<: *default
+    provider: gcp
+    regionId: gcp.europe-west1
+  - <<: *default
+    geography: north-america
+    provider: aws
+    regionId: aws.us-east-1
+  - <<: *default
+    geography: north-america
+    provider: azure
+    regionId: azure.eastus
+  - <<: *default
+    geography: north-america
+    provider: gcp
+    regionId: gcp.us-east4
+  - <<: *default
+    geography: south-america
+    provider: aws
+    regionId: aws.sa-east-1
+  - <<: *default
+    geography: south-america
+    provider: azure
+    regionId: azure.brazilsouth
+  - <<: *default
+    geography: south-america
+    provider: gcp
+    regionId: gcp.southamerica-east1

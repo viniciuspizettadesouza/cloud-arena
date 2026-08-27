@@ -28,6 +28,11 @@ Last updated: 2026-08-27
 - M1-005: implemented absent, pending, satisfied, and violated monthly-budget constraint states with expected/actual violation details.
 - M1-006: froze the 100,000-user Europe/medium/production/balanced normalization fixture and deterministic output tests.
 - M1-007: passed Milestone 1 format, lint, boundary, type, unit-test, and build quality gates.
+- M2-001: added strict schemas and a multi-document YAML loader for versioned capabilities, providers, regions, patterns, evidence, and cross-document references; duplicate and invalid references fail fast.
+- M2-002/M2-003: curated five AWS/Azure/GCP capability mappings and nine evidenced launch regions with explicit product differences, availability caveats, deterministic geography defaults, and no latency claim.
+- M2-004: defined the provider-neutral `vm-managed-postgres` component graph, CDN exclusion, and standard through mission-critical availability rules.
+- M2-005: implemented deterministic generation of exactly one catalog-versioned AWS, Azure, and GCP candidate from a normalized workload, retaining service configurations, deployment options, graph relationships, exclusions, and caveats.
+- M2-006: passed Milestone 2 format, lint, boundary, type, unit-test, and build quality gates.
 
 ## Deferred
 
@@ -36,13 +41,13 @@ Last updated: 2026-08-27
 
 ## Next
 
-1. Define validated semantic catalog schemas and loaders under M2-001.
-2. Curate initial provider capability/service mappings and launch regions under M2-002 and M2-003.
+1. Implement atomic pricing snapshot persistence under M3-001.
+2. Implement the AWS and Azure pricing adapters against the frozen fixtures under M3-002 and M3-003.
 3. Keep GCP credential-dependent pricing evidence deferred under SPIKE-A1-GCP; M3-004 and downstream all-provider pricing coverage remain blocked by it.
 
 ## Known limitations
 
-- The API and web application are foundation shells only; the domain normalization engine is not exposed through an API route yet, and catalog, pricing, scoring, recommendation, and user workflow behavior are not implemented.
+- The API and web application are foundation shells only; the implemented normalization and catalog candidate-generation engines are not exposed through API routes yet, and pricing, scoring, recommendation, and user workflow behavior are not implemented.
 - The initial database schema contains only foundation metadata; pricing persistence begins in Milestone 3.
 - GCP exact Catalog service/SKU selectors and source pricing expressions remain unresolved until SPIKE-A1-GCP.
 - Calculator totals have not yet been captured; E1 freezes the inputs and M7-002 performs the nine official comparisons.

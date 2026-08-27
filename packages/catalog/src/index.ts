@@ -1,8 +1,4 @@
-import type { CloudProvider } from "@cloud-arena/domain";
-
-export interface CatalogRecordIdentity {
-  id: string;
-  provider: CloudProvider;
-}
+export * from "./candidates.js";
+export * from "./config.js";
 
 export const CATALOG_PACKAGE = "@cloud-arena/catalog" as const;

@@ -45,12 +45,12 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 2 — Semantic cloud catalog
 
-- [ ] **M2-001 — Define catalog schemas and loaders.** Depends on: M1-001, M0-003. Output: validated YAML schemas for capabilities, providers, regions, patterns, and catalog version. Acceptance: invalid references and duplicate IDs fail fast.
-- [ ] **M2-002 — Curate initial capabilities and service mappings.** Depends on: M2-001, SPIKE-B2. Output: AWS/Azure/GCP mappings for compute VM, managed PostgreSQL, object storage, load balancer, and applicable CDN. Acceptance: provider differences/caveats are retained and no mapping claims identity.
-- [ ] **M2-003 — Curate validated launch regions.** Depends on: M2-001, SPIKE-B1. Output: region records and geography-to-region selection rules. Acceptance: only evidenced service/SKU combinations are selectable; no geographic-distance latency claim is emitted.
-- [ ] **M2-004 — Define the VM plus managed PostgreSQL pattern.** Depends on: M2-002, M2-003. Output: `vm-managed-postgres` requirements and component graph. Acceptance: pattern is provider-neutral and supports the read-only Internet → load balancer → compute → PostgreSQL plus object storage view.
-- [ ] **M2-005 — Generate three architecture candidates.** Depends on: M2-004, M1-003. Output: deterministic provider-specific candidates from one normalized workload. Acceptance: exactly one valid baseline candidate per provider contains region, services, capabilities, and caveats.
-- [ ] **M2-006 — Pass Milestone 2 quality gates.** Depends on: M2-005. Output: catalog validation and candidate-generation tests plus status update. Acceptance: reference input produces three candidates without pricing.
+- [x] **M2-001 — Define catalog schemas and loaders.** Depends on: M1-001, M0-003. Output: validated YAML schemas for capabilities, providers, regions, patterns, and catalog version. Acceptance: invalid references and duplicate IDs fail fast.
+- [x] **M2-002 — Curate initial capabilities and service mappings.** Depends on: M2-001, SPIKE-B2. Output: AWS/Azure/GCP mappings for compute VM, managed PostgreSQL, object storage, load balancer, and applicable CDN. Acceptance: provider differences/caveats are retained and no mapping claims identity.
+- [x] **M2-003 — Curate validated launch regions.** Depends on: M2-001, SPIKE-B1. Output: region records and geography-to-region selection rules. Acceptance: only evidenced service/SKU combinations are selectable; no geographic-distance latency claim is emitted.
+- [x] **M2-004 — Define the VM plus managed PostgreSQL pattern.** Depends on: M2-002, M2-003. Output: `vm-managed-postgres` requirements and component graph. Acceptance: pattern is provider-neutral and supports the read-only Internet → load balancer → compute → PostgreSQL plus object storage view.
+- [x] **M2-005 — Generate three architecture candidates.** Depends on: M2-004, M1-003. Output: deterministic provider-specific candidates from one normalized workload. Acceptance: exactly one valid baseline candidate per provider contains region, services, capabilities, and caveats.
+- [x] **M2-006 — Pass Milestone 2 quality gates.** Depends on: M2-005. Output: catalog validation and candidate-generation tests plus status update. Acceptance: reference input produces three candidates without pricing.
 
 ## Milestone 3 — Pricing adapters
 

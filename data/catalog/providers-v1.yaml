@@ -1,0 +1,470 @@
+version: catalog-v1
+providers:
+  - id: aws
+    name: Amazon Web Services
+    services:
+      - capabilityId: compute.vm
+        service: { id: aws.ec2, name: Amazon EC2 }
+        configuration:
+          id: aws.ec2.m6i-large
+          name: EC2 m6i.large Linux on-demand
+          details:
+            {
+              instanceType: m6i.large,
+              vCpu: 2,
+              memoryGiB: 8,
+              operatingSystem: Linux,
+              tenancy: shared,
+              purchaseOption: on-demand,
+              localStorage: false,
+            }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &awsComputeEurope
+            regionId: aws.eu-west-1
+            checkedAt: 2026-08-25
+            evidence: &awsComputeEvidence
+              - {
+                  title: EC2 M6i regional availability,
+                  url: https://aws.amazon.com/about-aws/whats-new/2021/12/amazon-ec2-m6i-instances-regions/,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *awsComputeEurope
+            regionId: aws.us-east-1
+          - <<: *awsComputeEurope
+            regionId: aws.sa-east-1
+        caveats:
+          - The 2-vCPU/8-GiB selection is a comparable starting shape, not a cross-provider performance claim.
+          - EBS volume cost is separate from the VM configuration.
+      - capabilityId: database.postgresql.managed
+        service: { id: aws.rds-postgresql, name: Amazon RDS for PostgreSQL }
+        configuration:
+          id: aws.rds-postgresql.db-m6g-large-gp3
+          name: RDS PostgreSQL db.m6g.large with gp3
+          details:
+            {
+              instanceClass: db.m6g.large,
+              vCpu: 2,
+              memoryGiB: 8,
+              engine: PostgreSQL,
+              storageType: gp3,
+            }
+        scope: regional
+        deploymentOptions:
+          - id: single-zone
+            name: Single-AZ DB instance
+            details: { topology: single-az }
+            caveats: [No standby is provided for an Availability Zone failure.]
+          - id: high-availability
+            name: Multi-AZ DB instance
+            details: { topology: multi-az, standby: true }
+            caveats: [Multi-AZ improves availability but is not multi-region disaster recovery.]
+        regionSupport:
+          - &awsDatabaseEurope
+            regionId: aws.eu-west-1
+            checkedAt: 2026-08-25
+            evidence: &awsDatabaseEvidence
+              - {
+                  title: RDS M6g and R6g regional availability,
+                  url: https://aws.amazon.com/about-aws/whats-new/2023/08/amazon-rds-m6g-r6g-database-instances-six-regions/,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *awsDatabaseEurope
+            regionId: aws.us-east-1
+          - <<: *awsDatabaseEurope
+            regionId: aws.sa-east-1
+        caveats:
+          - Database engine versions and orderable options require revalidation at catalog release time.
+      - capabilityId: storage.object
+        service: { id: aws.s3, name: Amazon S3 }
+        configuration:
+          id: aws.s3.standard-regional
+          name: S3 Standard regional bucket
+          details: { storageClass: Standard, locationType: regional }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &awsObjectEurope
+            regionId: aws.eu-west-1
+            checkedAt: 2026-08-25
+            evidence: &awsRegionServiceEvidence
+              - {
+                  title: AWS regional services,
+                  url: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *awsObjectEurope
+            regionId: aws.us-east-1
+          - <<: *awsObjectEurope
+            regionId: aws.sa-east-1
+        caveats:
+          - Requests, retrieval, replication, and transfer are separate cost dimensions.
+      - capabilityId: network.load-balancer
+        service: { id: aws.application-load-balancer, name: Application Load Balancer }
+        configuration:
+          id: aws.application-load-balancer.internet-facing
+          name: Internet-facing Application Load Balancer
+          details:
+            { layer: 7, protocols: [HTTP, HTTPS], scheme: internet-facing, healthChecks: true }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &awsLbEurope
+            regionId: aws.eu-west-1
+            checkedAt: 2026-08-25
+            evidence: &awsLbEvidence
+              - {
+                  title: Elastic Load Balancing API overview,
+                  url: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/Welcome.html,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *awsLbEurope
+            regionId: aws.us-east-1
+          - <<: *awsLbEurope
+            regionId: aws.sa-east-1
+        caveats:
+          - Load balancer hours and LCUs are priced separately; WAF, certificates, and DNS are excluded.
+      - capabilityId: network.cdn
+        service: { id: aws.cloudfront, name: Amazon CloudFront }
+        configuration:
+          id: aws.cloudfront.standard
+          name: CloudFront standard distribution
+          details: { deliveryScope: global, originSupport: HTTP }
+        scope: global
+        deploymentOptions: []
+        regionSupport:
+          - &awsCdnEurope
+            regionId: aws.eu-west-1
+            checkedAt: 2026-08-25
+            evidence: &awsCdnEvidence
+              - {
+                  title: Amazon CloudFront overview,
+                  url: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *awsCdnEurope
+            regionId: aws.us-east-1
+          - <<: *awsCdnEurope
+            regionId: aws.sa-east-1
+        caveats:
+          - This optional mapping is excluded from the baseline until cacheability inputs exist.
+
+  - id: azure
+    name: Microsoft Azure
+    services:
+      - capabilityId: compute.vm
+        service: { id: azure.virtual-machines, name: Azure Virtual Machines }
+        configuration:
+          id: azure.virtual-machines.standard-d2as-v5
+          name: Standard_D2as_v5 Linux pay-as-you-go
+          details:
+            {
+              size: Standard_D2as_v5,
+              vCpu: 2,
+              memoryGiB: 8,
+              operatingSystem: Linux,
+              purchaseOption: pay-as-you-go,
+              localDisk: false,
+            }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &azureComputeEurope
+            regionId: azure.westeurope
+            checkedAt: 2026-08-25
+            evidence: &azureComputeEvidence
+              - {
+                  title: Azure Dasv5 size series,
+                  url: https://learn.microsoft.com/azure/virtual-machines/sizes/general-purpose/dasv5-series,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *azureComputeEurope
+            regionId: azure.eastus
+          - <<: *azureComputeEurope
+            regionId: azure.brazilsouth
+        caveats:
+          - Subscription-specific Resource SKU restrictions must be checked before deployment.
+          - The 2-vCPU/8-GiB selection is not a cross-provider performance claim.
+      - capabilityId: database.postgresql.managed
+        service:
+          {
+            id: azure.postgresql-flexible-server,
+            name: Azure Database for PostgreSQL Flexible Server,
+          }
+        configuration:
+          id: azure.postgresql-flexible-server.standard-d2ds-v5
+          name: General Purpose Standard_D2ds_v5
+          details:
+            {
+              tier: General Purpose,
+              computeSize: Standard_D2ds_v5,
+              vCpu: 2,
+              memoryGiB: 8,
+              engine: PostgreSQL,
+              storage: provisioned,
+            }
+        scope: regional
+        deploymentOptions:
+          - id: single-zone
+            name: Same-zone without HA
+            details: { topology: same-zone, highAvailability: false }
+            caveats: [No zone-redundant standby is configured.]
+          - id: high-availability
+            name: Zone-redundant high availability
+            details: { topology: zone-redundant, highAvailability: true }
+            caveats:
+              [Zone-redundant HA is region-dependent and is not multi-region disaster recovery.]
+        regionSupport:
+          - &azureDatabaseEurope
+            regionId: azure.westeurope
+            checkedAt: 2026-08-25
+            evidence: &azureDatabaseEvidence
+              - {
+                  title: PostgreSQL Flexible Server regions and capabilities,
+                  url: https://learn.microsoft.com/azure/postgresql/flexible-server/overview,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *azureDatabaseEurope
+            regionId: azure.eastus
+          - <<: *azureDatabaseEurope
+            regionId: azure.brazilsouth
+        caveats:
+          - Zone-redundant HA availability must be revalidated for the selected subscription and region.
+      - capabilityId: storage.object
+        service: { id: azure.blob-storage, name: Azure Blob Storage }
+        configuration:
+          id: azure.blob-storage.hot-lrs
+          name: StorageV2 Hot Standard LRS
+          details:
+            { accountKind: StorageV2, accessTier: Hot, redundancy: LRS, performance: Standard }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &azureObjectEurope
+            regionId: azure.westeurope
+            checkedAt: 2026-08-25
+            evidence: &azureObjectEvidence
+              - {
+                  title: Azure Blob Storage introduction,
+                  url: https://learn.microsoft.com/azure/storage/blobs/storage-blobs-introduction,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *azureObjectEurope
+            regionId: azure.eastus
+          - <<: *azureObjectEurope
+            regionId: azure.brazilsouth
+        caveats:
+          - Operations, retrieval, replication, and transfer are separate cost dimensions.
+      - capabilityId: network.load-balancer
+        service: { id: azure.application-gateway, name: Azure Application Gateway }
+        configuration:
+          id: azure.application-gateway.standard-v2
+          name: Application Gateway Standard_v2
+          details:
+            {
+              tier: Standard_v2,
+              layer: 7,
+              protocols: [HTTP, HTTPS],
+              frontend: public,
+              healthProbes: true,
+            }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &azureLbEurope
+            regionId: azure.westeurope
+            checkedAt: 2026-08-25
+            evidence: &azureLbEvidence
+              - {
+                  title: Application Gateway v2 overview and regions,
+                  url: https://learn.microsoft.com/azure/application-gateway/overview-v2,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *azureLbEurope
+            regionId: azure.eastus
+          - <<: *azureLbEurope
+            regionId: azure.brazilsouth
+        caveats:
+          - Fixed and capacity-unit charges apply; subnet and public IP requirements are retained differences.
+          - WAF_v2, certificates, and DNS are excluded.
+      - capabilityId: network.cdn
+        service: { id: azure.front-door, name: Azure Front Door }
+        configuration:
+          id: azure.front-door-standard
+          name: Azure Front Door Standard
+          details: { tier: Standard, deliveryScope: global, caching: optional }
+        scope: global
+        deploymentOptions: []
+        regionSupport:
+          - &azureCdnEurope
+            regionId: azure.westeurope
+            checkedAt: 2026-08-25
+            evidence: &azureCdnEvidence
+              - {
+                  title: Azure Front Door overview,
+                  url: https://learn.microsoft.com/azure/frontdoor/front-door-overview,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *azureCdnEurope
+            regionId: azure.eastus
+          - <<: *azureCdnEurope
+            regionId: azure.brazilsouth
+        caveats:
+          - This optional mapping is excluded from the baseline until cacheability inputs exist.
+
+  - id: gcp
+    name: Google Cloud Platform
+    services:
+      - capabilityId: compute.vm
+        service: { id: gcp.compute-engine, name: Compute Engine }
+        configuration:
+          id: gcp.compute-engine.e2-standard-2
+          name: e2-standard-2 Linux on-demand
+          details:
+            {
+              machineType: e2-standard-2,
+              vCpu: 2,
+              memoryGiB: 8,
+              operatingSystem: Linux,
+              purchaseOption: on-demand,
+            }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &gcpComputeEurope
+            regionId: gcp.europe-west1
+            checkedAt: 2026-08-25
+            evidence: &gcpComputeEvidence
+              - {
+                  title: Compute Engine regions and machine-series availability,
+                  url: https://cloud.google.com/compute/docs/regions-zones,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *gcpComputeEurope
+            regionId: gcp.us-east4
+          - <<: *gcpComputeEurope
+            regionId: gcp.southamerica-east1
+        caveats:
+          - The 2-vCPU/8-GiB selection is not a cross-provider performance claim.
+          - Persistent disk is a separate cost dimension.
+      - capabilityId: database.postgresql.managed
+        service: { id: gcp.cloud-sql-postgresql, name: Cloud SQL for PostgreSQL }
+        configuration:
+          id: gcp.cloud-sql-postgresql.db-custom-2-8192
+          name: Enterprise db-custom-2-8192 with SSD
+          details:
+            {
+              edition: Enterprise,
+              machineType: db-custom-2-8192,
+              vCpu: 2,
+              memoryMiB: 8192,
+              engine: PostgreSQL,
+              storageType: SSD,
+            }
+        scope: regional
+        deploymentOptions:
+          - id: single-zone
+            name: Zonal instance
+            details: { topology: zonal, availabilityType: ZONAL }
+            caveats: [No regional standby is configured.]
+          - id: high-availability
+            name: Regional high availability
+            details: { topology: regional, availabilityType: REGIONAL }
+            caveats: [Regional HA is not multi-region disaster recovery.]
+        regionSupport:
+          - &gcpDatabaseEurope
+            regionId: gcp.europe-west1
+            checkedAt: 2026-08-25
+            evidence: &gcpDatabaseEvidence
+              - {
+                  title: Cloud SQL PostgreSQL region availability,
+                  url: https://cloud.google.com/sql/docs/postgres/region-availability,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *gcpDatabaseEurope
+            regionId: gcp.us-east4
+          - <<: *gcpDatabaseEurope
+            regionId: gcp.southamerica-east1
+        caveats:
+          - Exact Cloud Billing Catalog SKU selectors remain deferred to SPIKE-A1-GCP and are not semantic IDs.
+      - capabilityId: storage.object
+        service: { id: gcp.cloud-storage, name: Cloud Storage }
+        configuration:
+          id: gcp.cloud-storage.standard-regional
+          name: Standard regional Cloud Storage
+          details: { storageClass: Standard, locationType: region }
+        scope: regional
+        deploymentOptions: []
+        regionSupport:
+          - &gcpObjectEurope
+            regionId: gcp.europe-west1
+            checkedAt: 2026-08-25
+            evidence: &gcpLocationEvidence
+              - {
+                  title: Google Cloud global locations and services,
+                  url: https://cloud.google.com/about/locations,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *gcpObjectEurope
+            regionId: gcp.us-east4
+          - <<: *gcpObjectEurope
+            regionId: gcp.southamerica-east1
+        caveats:
+          - Operations, retrieval, replication, and transfer are separate cost dimensions.
+      - capabilityId: network.load-balancer
+        service: { id: gcp.application-load-balancer, name: Cloud Load Balancing }
+        configuration:
+          id: gcp.application-load-balancer.global-external-premium
+          name: Global external Application Load Balancer
+          details:
+            {
+              scope: global,
+              tier: Premium,
+              layer: 7,
+              protocols: [HTTP, HTTPS],
+              backend: instance-group,
+            }
+        scope: global
+        deploymentOptions: []
+        regionSupport:
+          - &gcpLbEurope
+            regionId: gcp.europe-west1
+            checkedAt: 2026-08-25
+            evidence: &gcpLbEvidence
+              - {
+                  title: Global external Application Load Balancer overview,
+                  url: https://cloud.google.com/load-balancing/docs/https,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *gcpLbEurope
+            regionId: gcp.us-east4
+          - <<: *gcpLbEurope
+            regionId: gcp.southamerica-east1
+        caveats:
+          - The frontend is global while instance-group backends remain regional.
+          - Forwarding, proxy, processing, certificates, and DNS have separate pricing or exclusions.
+      - capabilityId: network.cdn
+        service: { id: gcp.cloud-cdn, name: Cloud CDN }
+        configuration:
+          id: gcp.cloud-cdn.external-application-load-balancer
+          name: Cloud CDN on external Application Load Balancer
+          details: { deliveryScope: global, requiredFrontend: external-application-load-balancer }
+        scope: global
+        deploymentOptions: []
+        regionSupport:
+          - &gcpCdnEurope
+            regionId: gcp.europe-west1
+            checkedAt: 2026-08-25
+            evidence: &gcpCdnEvidence
+              - {
+                  title: Cloud CDN overview,
+                  url: https://cloud.google.com/cdn/docs/overview,
+                  retrievedAt: 2026-08-25,
+                }
+          - <<: *gcpCdnEurope
+            regionId: gcp.us-east4
+          - <<: *gcpCdnEurope
+            regionId: gcp.southamerica-east1
+        caveats:
+          - This optional mapping is excluded from the baseline until cacheability inputs exist.

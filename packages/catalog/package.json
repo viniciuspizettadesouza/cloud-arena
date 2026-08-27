@@ -11,11 +11,14 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "lint": "eslint src --max-warnings 0",
+    "lint": "eslint src test --max-warnings 0",
     "test": "vitest run --passWithNoTests",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@cloud-arena/domain": "workspace:*"
+    "@cloud-arena/contracts": "workspace:*",
+    "@cloud-arena/domain": "workspace:*",
+    "yaml": "^2.9.0",
+    "zod": "^4.4.3"
   }
 }

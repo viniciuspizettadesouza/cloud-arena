@@ -1,0 +1,82 @@
+version: catalog-v1
+patterns:
+  - id: vm-managed-postgres
+    name: VM plus managed PostgreSQL
+    description: A single-region web API baseline using virtual machines and provider-managed PostgreSQL.
+    caveats:
+      - Service mappings implement comparable capabilities; they do not claim product or performance identity.
+      - Capacity, autoscaling, recovery objectives, DNS, certificates, WAF, and disaster recovery are not established by this baseline.
+    nodes:
+      - id: internet
+        type: external
+        name: Internet
+      - id: load-balancer
+        type: component
+        name: Application load balancer
+        capabilityId: network.load-balancer
+        required: true
+        quantity: { source: fixed, value: 1 }
+        deploymentOptionSource: none
+      - id: compute
+        type: component
+        name: Application compute
+        capabilityId: compute.vm
+        required: true
+        quantity: { source: availability-rule }
+        deploymentOptionSource: none
+      - id: postgresql
+        type: component
+        name: Managed PostgreSQL
+        capabilityId: database.postgresql.managed
+        required: true
+        quantity: { source: fixed, value: 1 }
+        deploymentOptionSource: availability-rule
+      - id: object-storage
+        type: component
+        name: Object storage
+        capabilityId: storage.object
+        required: true
+        quantity: { source: fixed, value: 1 }
+        deploymentOptionSource: none
+    edges:
+      - { from: internet, to: load-balancer, relationship: request-flow }
+      - { from: load-balancer, to: compute, relationship: request-flow }
+      - { from: compute, to: postgresql, relationship: data-access }
+      - { from: compute, to: object-storage, relationship: data-access }
+    excludedCapabilities:
+      - capabilityId: network.cdn
+        reasonCode: insufficient-cacheability-input
+        reason: CDN is excluded because cacheability, hit ratio, invalidation, and traffic-distribution inputs are absent.
+    availabilityRules:
+      - availability: standard
+        requirements:
+          - { componentId: load-balancer }
+          - { componentId: compute, quantity: 1 }
+          - { componentId: postgresql, deploymentOptionId: single-zone }
+          - { componentId: object-storage }
+        caveats:
+          - One compute instance and a single-zone database do not tolerate a zone failure.
+      - availability: production
+        requirements:
+          - { componentId: load-balancer }
+          - { componentId: compute, quantity: 2 }
+          - { componentId: postgresql, deploymentOptionId: high-availability }
+          - { componentId: object-storage }
+        caveats:
+          - Two compute instances and provider database HA are used for the production baseline.
+      - availability: high
+        requirements:
+          - { componentId: load-balancer }
+          - { componentId: compute, quantity: 2 }
+          - { componentId: postgresql, deploymentOptionId: high-availability }
+          - { componentId: object-storage }
+        caveats:
+          - Recovery objectives and autoscaling capacity are unspecified, so high-availability suitability is not established.
+      - availability: mission-critical
+        requirements:
+          - { componentId: load-balancer }
+          - { componentId: compute, quantity: 2 }
+          - { componentId: postgresql, deploymentOptionId: high-availability }
+          - { componentId: object-storage }
+        caveats:
+          - A single-region baseline cannot establish mission-critical suitability or regional disaster recovery.

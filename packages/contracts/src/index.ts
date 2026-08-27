@@ -102,6 +102,7 @@ export const normalizedWorkloadSchema = z.strictObject({
   monthlyEgressGB: nonNegativeFiniteNumber,
   databaseStorageGB: nonNegativeFiniteNumber,
   objectStorageGB: nonNegativeFiniteNumber,
+  availability: availabilitySchema,
   availabilityTarget: z.number().min(0).max(1),
   regionPreference: z.string().min(1),
   provenance: z.array(fieldProvenanceSchema),

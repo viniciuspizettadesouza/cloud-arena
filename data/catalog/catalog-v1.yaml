@@ -1,0 +1,6 @@
+version: catalog-v1
+files:
+  capabilities: capabilities-v1.yaml
+  providers: providers-v1.yaml
+  regions: ../regions/launch-regions-v1.yaml
+  patterns: ../architecture-patterns/vm-managed-postgres-v1.yaml

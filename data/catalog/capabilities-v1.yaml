@@ -1,0 +1,27 @@
+version: catalog-v1
+capabilities:
+  - id: compute.vm
+    name: Virtual machine compute
+    description: General-purpose Linux virtual machines that run the application workload.
+    category: compute
+    optional: false
+  - id: database.postgresql.managed
+    name: Managed PostgreSQL
+    description: Provider-operated PostgreSQL compute and storage in the primary region.
+    category: database
+    optional: false
+  - id: storage.object
+    name: Object storage
+    description: Durable regional object storage for application objects.
+    category: storage
+    optional: false
+  - id: network.load-balancer
+    name: Application load balancer
+    description: Managed Layer 7 public HTTP and HTTPS ingress with health checks.
+    category: network
+    optional: false
+  - id: network.cdn
+    name: Content delivery network
+    description: Optional edge caching for cacheable HTTP content.
+    category: network
+    optional: true
