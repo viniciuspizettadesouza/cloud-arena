@@ -40,6 +40,10 @@ test("submits the reference workload and inspects comparison evidence", async ({
   await expect(page.getByRole("heading", { name: /confidence/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Assumptions & provenance" })).toBeVisible();
   await expect(page.getByText("AWS pricing: missing")).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Inspectable public-list estimates" }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Official calculator" })).toHaveCount(3);
 });
 
 test("shows canonical client validation errors", async ({ page }) => {

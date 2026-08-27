@@ -1,0 +1,34 @@
+{
+  "version": "golden-pricing-v1",
+  "retrievedAt": "2026-08-27T10:00:00Z",
+  "purpose": "Deterministic validation fixture; these pinned rates are not represented as current public prices or official-calculator evidence.",
+  "rates": {
+    "aws": {
+      "compute": 0.12,
+      "database-compute": 0.24,
+      "database-storage": 0.12,
+      "object-storage": 0.024,
+      "load-balancer-hour": 0.03,
+      "load-balancer-capacity": 0.012,
+      "public-egress": 0.12
+    },
+    "azure": {
+      "compute": 0.1,
+      "database-compute": 0.2,
+      "database-storage": 0.1,
+      "object-storage": 0.02,
+      "load-balancer-hour": 0.025,
+      "load-balancer-capacity": 0.01,
+      "public-egress": 0.1
+    },
+    "gcp": {
+      "compute": 0.08,
+      "database-compute": 0.16,
+      "database-storage": 0.08,
+      "object-storage": 0.016,
+      "load-balancer-hour": 0.02,
+      "load-balancer-capacity": 0.008,
+      "public-egress": 0.08
+    }
+  }
+}

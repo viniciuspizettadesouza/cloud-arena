@@ -1,0 +1,65 @@
+{
+  "version": "golden-scenarios-v1",
+  "source": "docs/research/fixtures/calculator-reference-architectures.json",
+  "datasetVersions": {
+    "catalog": "catalog-v1",
+    "assumptions": "workload-v1",
+    "scoring": "scoring-v1",
+    "costCalculation": "cost-v1",
+    "pricing": "golden-pricing-v1"
+  },
+  "scenarios": [
+    {
+      "id": "ref-10k-eu-medium",
+      "input": {
+        "applicationType": "web-api",
+        "monthlyActiveUsers": 10000,
+        "geography": { "type": "continent", "value": "Europe" },
+        "trafficProfile": "medium",
+        "availability": "standard",
+        "priority": "balanced",
+        "requestsPerMonth": 6000000,
+        "averageResponseKB": 50,
+        "monthlyEgressGB": 300,
+        "databaseStorageGB": 20,
+        "objectStorageGB": 100
+      },
+      "sha256": "188f230df72ce85df873d52f3e3b903bbf567c9335725be184e6e0353e8d0358"
+    },
+    {
+      "id": "ref-100k-eu-spiky",
+      "input": {
+        "applicationType": "web-api",
+        "monthlyActiveUsers": 100000,
+        "geography": { "type": "continent", "value": "Europe" },
+        "trafficProfile": "spiky",
+        "availability": "production",
+        "priority": "balanced",
+        "requestsPerMonth": 60000000,
+        "averageResponseKB": 50,
+        "monthlyEgressGB": 3000,
+        "databaseStorageGB": 100,
+        "objectStorageGB": 500
+      },
+      "sha256": "bb145b1b4502a84bc23ecf9f944cc26809ea76a33a5a0e1842385c3f757b51f6"
+    },
+    {
+      "id": "ref-500k-na-ha-budget",
+      "input": {
+        "applicationType": "web-api",
+        "monthlyActiveUsers": 500000,
+        "geography": { "type": "continent", "value": "North America" },
+        "trafficProfile": "high",
+        "availability": "high",
+        "priority": "cost",
+        "requestsPerMonth": 600000000,
+        "averageResponseKB": 50,
+        "monthlyEgressGB": 30000,
+        "databaseStorageGB": 500,
+        "objectStorageGB": 2000,
+        "monthlyBudgetUSD": 2500
+      },
+      "sha256": "8021cbe7b6b4ffbd5d6e76d718bba2392b567888c3e7f5f0618080e160b2f0e7"
+    }
+  ]
+}

@@ -51,6 +51,8 @@ Zod, OpenAPI, Pino, Tailwind CSS, and the component system are introduced by the
 - [Implementation plan](docs/implementation-plan.md)
 - [Detailed TODO](TODO.md)
 - [Implementation status](docs/implementation-status.md)
+- [Milestone 7 validation report](docs/validation/mvp-review.md)
+- [Known limitations and release status](docs/validation/known-limitations.md)
 - [Developer setup](docs/development.md)
 - [Foundational implementation brief](docs/reference/original-implementation-brief.md)
 
@@ -70,4 +72,4 @@ Follow the [developer setup](docs/development.md) for exact installation, databa
 
 ## Current status
 
-Documentation, the non-GCP technical spikes, and Milestones 0–2 and 4–6 are complete. The API and responsive web workflow now provide canonical workload validation, deterministic comparison/ranking, provider and architecture details, traceable costs, structured explanations, constraints, assumptions, confidence, and pricing status. Milestone 3 has atomic pricing snapshot persistence plus tested AWS and Azure adapters and a sync CLI. Authenticated GCP pricing evidence and selectors remain intentionally deferred under `SPIKE-A1-GCP`, so live GCP estimates remain explicitly unavailable rather than using fabricated prices.
+Documentation, the non-GCP technical spikes, Milestones 0–2 and 4–6, and the M7 golden-scenario dataset are complete. Validation/compliance controls now include provider notices, official source links, snapshot identity, and enforceable retention. Public MVP release remains blocked by authenticated GCP pricing, nine official-calculator exports, and provider-specific legal clearance; see the validation report for exact status.

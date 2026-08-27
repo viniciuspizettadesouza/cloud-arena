@@ -218,7 +218,7 @@ describe("workload routes", () => {
       costCalculation: "cost-v1",
     });
     const goldenHash = createHash("sha256").update(first.body).digest("hex");
-    expect(goldenHash).toBe("4cb88468d38f8b19837b74663bb556f54579431b25fa7cf43f3bb41dead32121");
+    expect(goldenHash).toBe("5aacf74dcb245977a412cc3fc8ab17e7c46620b736bd39f0704947aad56ab156");
   });
 
   it("distinguishes invalid input from unavailable pricing", async () => {

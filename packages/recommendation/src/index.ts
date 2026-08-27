@@ -74,6 +74,14 @@ export const comparisonVersionSchema = z.strictObject({
   ),
 });
 
+export const pricingNoticeSchema = z.strictObject({
+  provider: z.enum(["aws", "azure", "gcp"]),
+  providerName: textSchema,
+  pricingPageUrl: z.url(),
+  calculatorUrl: z.url(),
+  disclaimer: textSchema,
+});
+
 export const comparisonResultSchema = z.strictObject({
   input: workloadInputSchema,
   normalizedWorkload: normalizedWorkloadSchema,
@@ -83,6 +91,7 @@ export const comparisonResultSchema = z.strictObject({
   missingInformation: normalizedWorkloadSchema.shape.missingInformation,
   confidence: normalizedWorkloadSchema.shape.confidence,
   confidenceLabel: normalizedWorkloadSchema.shape.confidenceLabel,
+  pricingNotices: z.array(pricingNoticeSchema).length(3),
   versions: comparisonVersionSchema,
 });
 
@@ -94,6 +103,27 @@ export interface CandidateWithCost {
   candidate: ArchitectureCandidate;
   costEstimate: CostEstimate;
 }
+
+const PRICING_NOTICES = [
+  {
+    provider: "aws",
+    providerName: "AWS",
+    pricingPageUrl: "https://aws.amazon.com/pricing/",
+    calculatorUrl: "https://calculator.aws/",
+  },
+  {
+    provider: "azure",
+    providerName: "Microsoft Azure",
+    pricingPageUrl: "https://azure.microsoft.com/pricing/",
+    calculatorUrl: "https://azure.microsoft.com/pricing/calculator/",
+  },
+  {
+    provider: "gcp",
+    providerName: "Google Cloud",
+    pricingPageUrl: "https://cloud.google.com/pricing/",
+    calculatorUrl: "https://cloud.google.com/products/calculator",
+  },
+] as const;
 
 function constraintOrder(status: RankedCandidate["constraints"]["status"]): number {
   if (status === "satisfied" || status === "not-applicable") return 0;
@@ -239,6 +269,10 @@ export function buildComparison(
     missingInformation: normalizedWorkload.missingInformation,
     confidence: normalizedWorkload.confidence,
     confidenceLabel: normalizedWorkload.confidenceLabel,
+    pricingNotices: PRICING_NOTICES.map((notice) => ({
+      ...notice,
+      disclaimer: `Estimated from ${notice.providerName} public list prices. Actual charges may differ. Taxes, discounts, commitments, credits, and unmodeled usage are excluded. Verify with the official calculator and pricing page. Cloud Arena is not affiliated with or endorsed by ${notice.providerName}.`,
+    })),
     versions: {
       catalog: candidates[0]?.candidate.catalogVersion,
       assumptions: normalizedWorkload.assumptionsVersion,

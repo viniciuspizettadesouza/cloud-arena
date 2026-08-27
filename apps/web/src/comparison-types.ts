@@ -99,6 +99,13 @@ export interface ComparisonResult {
   missingInformation: Array<{ field: string; impact: string; reason: string }>;
   confidence: number;
   confidenceLabel: string;
+  pricingNotices: Array<{
+    provider: ProviderId;
+    providerName: string;
+    pricingPageUrl: string;
+    calculatorUrl: string;
+    disclaimer: string;
+  }>;
   versions: {
     catalog: string;
     assumptions: string;
@@ -106,7 +113,7 @@ export interface ComparisonResult {
     costCalculation: string;
     pricingSnapshots: Array<
       | { provider: ProviderId; status: "missing" }
-      | { provider: ProviderId; status: "active"; retrievedAt: string }
+      | { provider: ProviderId; status: "active"; snapshotId: string; retrievedAt: string }
     >;
   };
 }

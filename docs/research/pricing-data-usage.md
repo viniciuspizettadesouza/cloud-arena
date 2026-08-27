@@ -65,7 +65,9 @@ effective dates and reviewer.
   contain a minimal representative subset and no credentials, account data, or
   bulk catalog.
 - A provider-specific contractual requirement or deletion request overrides
-  these defaults. The retention periods require confirmation at `M7-004`.
+  these defaults. The retention periods are implemented by `pnpm pricing:prune`,
+  but still require provider-specific legal confirmation before `M7-004` can
+  close.
 
 ### Redistribution and API behavior
 

@@ -92,3 +92,14 @@ configuration error until `SPIKE-A1-GCP` supplies authenticated fixtures and rev
 an all-provider run therefore reports the AWS/Azure outcomes and exits nonzero for the explicit GCP
 gap. A provider snapshot activates only after every requested launch region and baseline category is
 present and validated. Failed or partial snapshots never replace the previous active snapshot.
+
+Run the retention job on an operator-controlled schedule after migrations:
+
+```sh
+pnpm pricing:prune
+```
+
+It deletes raw provider payloads older than 90 days and inactive normalized snapshots older than
+13 months. Pricing records retain source identity after their raw payload expires. Active snapshots
+are never deleted by this job. These are the current engineering defaults; public deployment still
+requires the provider-specific clearance recorded under `LEGAL-PRICING-001`.

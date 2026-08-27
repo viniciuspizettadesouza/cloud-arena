@@ -24,6 +24,31 @@ function date(value: string | undefined): Date | null {
   return value === undefined ? null : new Date(value);
 }
 
+export interface PricingRetentionResult {
+  rawPayloadsDeleted: number;
+  snapshotsDeleted: number;
+  rawPayloadCutoff: string;
+  normalizedSnapshotCutoff: string;
+}
+
+export function pricingRetentionCutoffs(now: Date) {
+  const rawPayloadCutoff = new Date(now);
+  rawPayloadCutoff.setUTCDate(rawPayloadCutoff.getUTCDate() - 90);
+  const targetMonth = now.getUTCMonth() - 13;
+  const normalizedSnapshotCutoff = new Date(now);
+  normalizedSnapshotCutoff.setUTCDate(1);
+  normalizedSnapshotCutoff.setUTCMonth(targetMonth);
+  const lastTargetDay = new Date(
+    Date.UTC(
+      normalizedSnapshotCutoff.getUTCFullYear(),
+      normalizedSnapshotCutoff.getUTCMonth() + 1,
+      0,
+    ),
+  ).getUTCDate();
+  normalizedSnapshotCutoff.setUTCDate(Math.min(now.getUTCDate(), lastTargetDay));
+  return { rawPayloadCutoff, normalizedSnapshotCutoff };
+}
+
 export class PostgresPricingSnapshotRepository implements PricingSnapshotRepository {
   readonly #db: Database;
 
@@ -226,6 +251,31 @@ export class PostgresPricingSnapshotRepository implements PricingSnapshotReposit
         and(eq(pricingSyncLocks.provider, provider), eq(pricingSyncLocks.snapshotId, snapshotId)),
       );
   }
+
+  async enforceRetention(now = new Date()): Promise<PricingRetentionResult> {
+    const { rawPayloadCutoff, normalizedSnapshotCutoff } = pricingRetentionCutoffs(now);
+    return this.#db.transaction(async (transaction) => {
+      const snapshots = await transaction
+        .delete(pricingSnapshots)
+        .where(
+          and(
+            eq(pricingSnapshots.isActive, false),
+            lt(pricingSnapshots.startedAt, normalizedSnapshotCutoff),
+          ),
+        )
+        .returning({ id: pricingSnapshots.id });
+      const payloads = await transaction
+        .delete(pricingRawPayloads)
+        .where(lt(pricingRawPayloads.retrievedAt, rawPayloadCutoff))
+        .returning({ id: pricingRawPayloads.id });
+      return {
+        rawPayloadsDeleted: payloads.length,
+        snapshotsDeleted: snapshots.length,
+        rawPayloadCutoff: rawPayloadCutoff.toISOString(),
+        normalizedSnapshotCutoff: normalizedSnapshotCutoff.toISOString(),
+      };
+    });
+  }
 }
 
 export class PostgresActivePricingSnapshotReader implements ActivePricingSnapshotReader {
@@ -260,7 +310,7 @@ export class PostgresActivePricingSnapshotReader implements ActivePricingSnapsho
       records: records.map((record) => ({
         id: record.id,
         snapshotId: record.snapshotId,
-        rawPayloadId: record.rawPayloadId,
+        rawPayloadId: record.rawPayloadId ?? `retained-metadata:${record.id}`,
         provider,
         serviceCategory:
           record.serviceCategory as ActivePricingSnapshot["records"][number]["serviceCategory"],

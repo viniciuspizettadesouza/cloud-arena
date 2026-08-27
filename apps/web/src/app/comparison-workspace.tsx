@@ -464,6 +464,39 @@ function Results({ result }: { result: ComparisonResult }) {
           ))}
         </div>
       </section>
+      <section className="panel pricing-notices" aria-labelledby="pricing-notices-title">
+        <div>
+          <p className="kicker">Pricing notices</p>
+          <h3 id="pricing-notices-title">Inspectable public-list estimates</h3>
+        </div>
+        <div>
+          {result.pricingNotices.map((notice) => {
+            const snapshot = result.versions.pricingSnapshots.find(
+              ({ provider }) => provider === notice.provider,
+            );
+            return (
+              <div key={notice.provider} className="pricing-notice">
+                <strong>{notice.providerName}</strong>
+                <p>{notice.disclaimer}</p>
+                <p className="muted">
+                  {snapshot?.status === "active"
+                    ? `Snapshot ${snapshot.snapshotId}, retrieved ${new Date(snapshot.retrievedAt).toLocaleString()}.`
+                    : "No active pricing snapshot."}
+                </p>
+                <p>
+                  <a href={notice.pricingPageUrl} rel="noreferrer" target="_blank">
+                    Official pricing
+                  </a>{" "}
+                  ·{" "}
+                  <a href={notice.calculatorUrl} rel="noreferrer" target="_blank">
+                    Official calculator
+                  </a>
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
       <footer className="result-footer">
         <span>Catalog {result.versions.catalog}</span>
         <span>Scoring {result.versions.scoring}</span>

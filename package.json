@@ -23,6 +23,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings 0 && pnpm boundaries",
     "pricing:sync": "pnpm --filter @cloud-arena/api pricing:sync --",
+    "pricing:prune": "pnpm --filter @cloud-arena/database pricing:prune",
     "test": "turbo run test",
     "test:e2e": "playwright test",
     "typecheck": "turbo run typecheck"

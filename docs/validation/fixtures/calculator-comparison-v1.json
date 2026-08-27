@@ -1,0 +1,22 @@
+{
+  "version": "calculator-comparison-v1",
+  "policyVersion": "cost-deviation-v1",
+  "generatedAt": "2026-08-27T19:45:00Z",
+  "summary": {
+    "expectedComparisons": 9,
+    "pass": 0,
+    "acceptedException": 0,
+    "invalidComparison": 9
+  },
+  "comparisons": [
+    { "scenario": "ref-10k-eu-medium", "provider": "aws", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING"] },
+    { "scenario": "ref-10k-eu-medium", "provider": "azure", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING"] },
+    { "scenario": "ref-10k-eu-medium", "provider": "gcp", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING", "SPIKE-A1-GCP"] },
+    { "scenario": "ref-100k-eu-spiky", "provider": "aws", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING"] },
+    { "scenario": "ref-100k-eu-spiky", "provider": "azure", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING"] },
+    { "scenario": "ref-100k-eu-spiky", "provider": "gcp", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING", "SPIKE-A1-GCP"] },
+    { "scenario": "ref-500k-na-ha-budget", "provider": "aws", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING"] },
+    { "scenario": "ref-500k-na-ha-budget", "provider": "azure", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING"] },
+    { "scenario": "ref-500k-na-ha-budget", "provider": "gcp", "status": "invalid-comparison", "blockers": ["CALCULATOR-EVIDENCE-MISSING", "SPIKE-A1-GCP"] }
+  ]
+}

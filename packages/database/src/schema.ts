@@ -80,9 +80,9 @@ export const pricingRecords = pgTable(
     snapshotId: uuid("snapshot_id")
       .notNull()
       .references(() => pricingSnapshots.id, { onDelete: "cascade" }),
-    rawPayloadId: uuid("raw_payload_id")
-      .notNull()
-      .references(() => pricingRawPayloads.id, { onDelete: "restrict" }),
+    rawPayloadId: uuid("raw_payload_id").references(() => pricingRawPayloads.id, {
+      onDelete: "set null",
+    }),
     provider: varchar("provider", { length: 16 }).notNull(),
     serviceCategory: varchar("service_category", { length: 64 }).notNull(),
     serviceName: text("service_name").notNull(),

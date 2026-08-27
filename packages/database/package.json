@@ -18,7 +18,8 @@
     "db:check": "tsx scripts/check.ts",
     "db:generate": "drizzle-kit generate --config drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
-    "lint": "eslint src scripts drizzle.config.ts --max-warnings 0",
+    "pricing:prune": "tsx scripts/enforce-retention.ts",
+    "lint": "eslint src test scripts drizzle.config.ts --max-warnings 0",
     "test": "vitest run --passWithNoTests",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },

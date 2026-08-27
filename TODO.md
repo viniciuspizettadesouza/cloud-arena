@@ -93,7 +93,7 @@ For each milestone, “quality gates” means format check, lint, typecheck, rel
 
 ## Milestone 7 — Validation and MVP completion
 
-- [ ] **M7-001 — Freeze golden scenarios and datasets.** Depends on: M5-008. Output: 10k Europe/medium, 100k Europe/spiky/100 GB DB, and 500k North America/high-availability/budget workloads with pinned catalog, assumptions, scoring, and prices. Acceptance: repeated runs are identical without live APIs.
+- [x] **M7-001 — Freeze golden scenarios and datasets.** Depends on: M5-008. Output: 10k Europe/medium, 100k Europe/spiky/100 GB DB, and 500k North America/high-availability/budget workloads with pinned catalog, assumptions, scoring, and prices. Acceptance: repeated runs are identical without live APIs.
 - [ ] **M7-002 — Compare against official calculators.** Depends on: M7-001, SPIKE-E2. Output: component-level Cloud Arena versus official-calculator report for three reference architectures. Acceptance: inputs, timestamps, exclusions, and discrepancies are reproducible.
 - [ ] **M7-003 — Resolve material discrepancies.** Depends on: M7-002. Output: formula/parser fixes or documented justified exceptions. Acceptance: modeled components meet the agreed threshold or have an explicit limitation and owner.
 - [ ] **M7-004 — Verify pricing-data compliance and attribution.** Depends on: SPIKE-D1, M6-005. Output: implemented notices/attribution and retention behavior where required. Acceptance: no unresolved public-launch blocker remains.

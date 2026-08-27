@@ -168,6 +168,27 @@ export const comparisonFixture = {
   missingInformation: [missing],
   confidence: 0.61,
   confidenceLabel: "medium",
+  pricingNotices: [
+    ["aws", "AWS", "https://aws.amazon.com/pricing/", "https://calculator.aws/"],
+    [
+      "azure",
+      "Microsoft Azure",
+      "https://azure.microsoft.com/pricing/",
+      "https://azure.microsoft.com/pricing/calculator/",
+    ],
+    [
+      "gcp",
+      "Google Cloud",
+      "https://cloud.google.com/pricing/",
+      "https://cloud.google.com/products/calculator",
+    ],
+  ].map(([provider, providerName, pricingPageUrl, calculatorUrl]) => ({
+    provider,
+    providerName,
+    pricingPageUrl,
+    calculatorUrl,
+    disclaimer: `Estimated from ${providerName} public list prices. Actual charges may differ. Taxes, discounts, commitments, credits, and unmodeled usage are excluded. Verify with the official calculator and pricing page. Cloud Arena is not affiliated with or endorsed by ${providerName}.`,
+  })),
   versions: {
     catalog: "catalog-v1",
     assumptions: "workload-v1",

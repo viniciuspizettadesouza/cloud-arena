@@ -52,19 +52,24 @@ Last updated: 2026-08-27
 - M6-003/M6-004: implemented recommendation and three-provider summaries, explicit available/unavailable costs and constraints, traceable line items, score dimensions, service configurations, and read-only architecture flows.
 - M6-005: implemented structured reasons, runner-up trade-offs, caveats, assumptions, provenance, confidence, missing information, version metadata, and provider pricing timestamps/status.
 - M6-006/M6-007: added deterministic Playwright coverage for the reference submission, three candidates, cost-gap inspection, assumptions/confidence, and validation errors; repository-wide quality gates and the Chromium flow pass.
+- M7-001: froze all three E1 workloads, their catalog/assumption/scoring/cost versions, and a clearly test-only pricing dataset; repeated complete API comparisons are byte-identical and SHA-256 protected without live APIs.
+- Implemented the M7-004 engineering controls available without legal authority: provider disclaimers and official links in structured API/UI output, snapshot IDs/timestamps, and `pnpm pricing:prune` retention enforcement for 90-day raw payloads and 13-month inactive normalized snapshots.
+- Recorded a nine-cell calculator matrix, MVP outcome review, and final known-limitations report without misclassifying missing external evidence as passes or exceptions.
 
 ## Deferred
 
 - SPIKE-A1-GCP authenticated Catalog record capture remains deferred until a GCP API key or accepted caller identity is intentionally configured.
 - M3-004 remains blocked by SPIKE-A1-GCP. The GCP adapter now rejects missing credentials and the unresolved selector state with actionable errors, but it cannot normalize or activate unverified SKUs.
 - `LEGAL-PRICING-001` must be cleared during M7-004 before any public launch; it does not block private development or M0–M6.
+- `CALCULATOR-EVIDENCE-MISSING` blocks M7-002/M7-003: all nine cells are `invalid-comparison` until timestamped official-calculator exports and matching production-shaped snapshots are captured.
 
 ## Next
 
 1. Supply an intentional GCP caller identity and complete SPIKE-A1-GCP with sanitized authenticated SKU fixtures.
 2. Implement and verify the GCP parser/selectors under M3-004, enabling completion of the existing all-provider sync CLI.
 3. Run live launch-region synchronization, capture the coverage report, and pass the remaining Milestone 3 database and quality gates.
-4. Freeze the Milestone 7 golden scenarios and datasets, then begin official-calculator comparisons.
+4. Capture and retain the nine official-calculator exports against snapshots no more than 24 hours old, then compute policy-v1 deltas and resolve any material discrepancies.
+5. Obtain provider-specific legal clearance for the actual production data flow before changing `LEGAL-PRICING-001` or the release decision.
 
 ## Known limitations
 
@@ -72,7 +77,7 @@ Last updated: 2026-08-27
 - Pricing persistence and AWS/Azure adapters are implemented, but no committed snapshot is treated as current public pricing; operators must migrate the local database and run the live sync command.
 - GCP exact Catalog service/SKU selectors and source pricing expressions remain unresolved until SPIKE-A1-GCP.
 - GCP candidate estimates therefore remain explicitly unavailable with live data until the authenticated pricing gap is resolved; frozen tests verify the calculation behavior without treating those fixtures as current prices.
-- Calculator totals have not yet been captured; E1 freezes the inputs and M7-002 performs the nine official comparisons.
+- Calculator totals have not yet been captured; the validation report preserves all nine cells as invalid comparisons instead of fabricating results.
 - Public derived-price presentation remains subject to `LEGAL-PRICING-001` and M7-004.
 - Competitor notes are directional and require revalidation before public use.
 
