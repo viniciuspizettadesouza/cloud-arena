@@ -1,6 +1,6 @@
 # Cloud Arena Implementation TODO
 
-This is the execution backlog for the MVP. Stable IDs should be referenced in commits and pull requests. Checked items are completed documentation or research work; application implementation begins at Milestone 0.
+This is the execution backlog for the MVP. Stable IDs should be referenced in commits and pull requests. Checked items have satisfied their acceptance criteria; partially implemented or blocked items remain unchecked until all stated criteria are met. Application implementation begins at Milestone 0.
 
 For each milestone, “quality gates” means format check, lint, typecheck, relevant tests, and build. Playwright is additionally required once the web flow exists.
 
